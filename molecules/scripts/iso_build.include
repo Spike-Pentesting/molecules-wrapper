@@ -1,0 +1,3 @@
+#!/bin/sh
+
+LOCK_TIMEOUT=$((3600 * 24)) # 24 hours
