@@ -55,10 +55,8 @@ packages_to_add:
 	sys-power/cpufrequtils,
 	www-client/midori,
 	x11-themes/gnome-icon-theme,
-	net-analyzer/sslcat,
-	net-analyzer/sslscan,
-	net-analyzer/sslstrip,
-	net-analyzer/ssltest
+	app-shells/zsh,
+	spike/spike
 
 # Determine whether repositories update should be run (if packages_to_add is set)
 # (default is: no), values are: yes, no.
