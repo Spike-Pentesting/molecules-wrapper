@@ -72,11 +72,11 @@ setup_users() {
             exit 1
         fi
         . /sbin/sabayon-functions.sh
-        sabayon_setup_live_user "sabayon" || exit 1
-        # setup "sabayon" password to... sabayon!
-        echo "sabayon:sabayon" | chpasswd
+        sabayon_setup_live_user "spike" || exit 1
+        # setup "spike" password to... spike!
+        echo "spike:spike" | chpasswd
 
         # also add "sabayon" to disk group
-        usermod -a -G disk sabayon
+        usermod -a -G disk spike
     ) || return 1
 }
