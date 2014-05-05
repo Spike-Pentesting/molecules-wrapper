@@ -61,6 +61,8 @@ basic_environment_setup() {
 	# See bug 3134
 	groupadd -f games
 
+	chsh /bin/zsh
+
 	# all these images come with X.Org
 	sd_enable graphical target
 }
