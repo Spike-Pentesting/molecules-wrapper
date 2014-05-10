@@ -1,5 +1,5 @@
 # Define an alternative execution strategy, in this case, the value must be
-# "iso_remaster"   
+# "iso_remaster"
 execution_strategy: iso_remaster
 
 # Release string
@@ -42,10 +42,10 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # custom_packages_remove_cmd:
 
 # List of packages that would be added from chrooted system (comma separated)
-packages_to_add: 
+packages_to_add:
 	@X,
 	sys-apps/gpu-detector,
-	@e17,
+	spike/spike-enlightenment,
 	@fluxbox,
 	@wireless,
 	app-admin/rigo,
