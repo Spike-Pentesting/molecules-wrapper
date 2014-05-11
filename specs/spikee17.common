@@ -46,6 +46,7 @@ packages_to_add:
 	@X,
 	sys-apps/gpu-detector,
 	spike/spike-enlightenment,
+	spike/spike,
 	@fluxbox,
 	@wireless,
 	app-admin/rigo,
