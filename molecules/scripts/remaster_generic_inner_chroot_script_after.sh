@@ -338,6 +338,7 @@ prepare_e17() {
 	 #sed -i '/lxdm-greeter-gtk/ a\\nlast_session=enlightenment.desktop\nlast_lang=' /etc/lxdm/lxdm.conf
 	# Fix ~/.gtkrc-2.0 for some nice icons in gtk
 	echo 'gtk-icon-theme-name="Tango" gtk-theme-name="Xfce"' | tr " " "\n" > /etc/skel/.gtkrc-2.0
+	genmenu.py -e #builds e17 menu
 }
 
 prepare_xfce() {

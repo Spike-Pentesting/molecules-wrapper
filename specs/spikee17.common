@@ -49,6 +49,7 @@ packages_to_add:
 	spike/spike-version,
 	sys-apps/gpu-detector,
 	spike/spike-enlightenment,
+	spike/spike-menu,
 	spike/spike,
 	@fluxbox,
 	@wireless,
