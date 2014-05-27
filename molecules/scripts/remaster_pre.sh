@@ -10,12 +10,7 @@ CHROOT_PKGS_DIR="${CHROOT_DIR}/var/lib/entropy/client/packages"
 [[ ! -d "${PKGS_DIR}" ]] && mkdir -p "${PKGS_DIR}"
 [[ ! -d "${CHROOT_PKGS_DIR}" ]] && mkdir -p "${CHROOT_PKGS_DIR}"
 
-echo '[spike]
-desc = Spike Pentesting Sabayon Repository
-repo = http://repository.spike-pentesting.org#bz2
-enabled = true
-pkg = http://repository.spike-pentesting.org
-' >> "${CHROOT_DIR}/etc/entropy/repositories.conf.d/entropy_spike"
+
 
 # make sure it's all clean before mounting
 echo "Mounting bind to ${CHROOT_PKGS_DIR}"
