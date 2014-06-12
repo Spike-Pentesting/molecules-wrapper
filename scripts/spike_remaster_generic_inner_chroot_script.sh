@@ -14,6 +14,7 @@ repo = http://repository.spike-pentesting.org#bz2
 enabled = true
 pkg = http://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/entropy_spike
+export ACCEPT_LICENSE="*"
 
 # disable all mirrors but GARR
 for repo_conf in /etc/entropy/repositories.conf.d/entropy_*; do
