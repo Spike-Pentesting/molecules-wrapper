@@ -19,7 +19,9 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 %env outer_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_pre.sh
 
 # Execute repositories update here, in a more fault-tolerant flavor
-%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/../gen/remaster_generic_inner_chroot_script_wrap.sh
+#%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/../gen/remaster_generic_inner_chroot_script_wrap.sh
+
+%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/../gen/inner_source_chroot_update_wrap.sh
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
@@ -39,7 +41,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 %env destination_iso_directory: ${SABAYON_MOLECULE_HOME:-/sabayon}/../molecules_isos
 
 
-
+# %env inner_source_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/inner_source_chroot_update.sh
 
 # Custom shell call to packages removal (default is: equo remove)
 # custom_packages_remove_cmd:
