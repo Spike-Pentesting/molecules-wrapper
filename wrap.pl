@@ -8,29 +8,35 @@ foreach my $script (@Wrap_scripts) {
     my $Molecules_script = $script;
     $Molecules_script =~ s/\_wrap//g;
     $Molecules_script = "molecules/" . $Molecules_script;
-    open my $FILE, "<$Molecules_script";
-    my @MOLECULE_FILE = <$FILE>;
-    close $FILE;
-    open my $FILE, "<$script";
-    my @WRAP_FILE = <$FILE>;
-    close $FILE;
-    my $c     = 0;
-    my $guard = quotemeta("/etc/profile");
+    my @MOLECULE_FILE = load_file($Molecules_script);
+    my @WRAP_FILE     = load_file($script);
+    my $c             = 0;
+    my $guard         = quotemeta("/etc/profile");
     say "Molecules file <$Molecules_script> is " . @MOLECULE_FILE . " lines";
-    for (@MOLECULE_FILE) {
-        if ( $_ =~ $guard ) {
-            say "Found $guard at " . $c.", good";
-            $c++;
-            last;
-        }
-        $c++;
-    }
+    (   $_ =~ $guard
+        ? ( say( "Found $guard at " . $c . ", good" ) and $c++ and last )
+        : $c++
+    ) for (@MOLECULE_FILE);
     die("Something went wrong with $Molecules_script, i could not find $guard in molecules scripts"
     ) unless $c != @MOLECULE_FILE;
     splice @MOLECULE_FILE, $c, 0, @WRAP_FILE;
     $script =~ s/scripts\///g;
-    open my $OUTPUT, ">/tmp/" . $script;
-    print $OUTPUT @MOLECULE_FILE;
+    write_file( "/tmp/" . $script, @MOLECULE_FILE );
+}
+
+sub load_file($) {
+    my $file = shift;
+    open my $FILE, "<$file";
+    my @LINES = <$FILE>;
+    close $FILE;
+    return @LINES;
+}
+
+sub write_file($@) {
+    my $file = shift @_;
+    my @OUT  = @_;
+    open my $OUTPUT, ">$file";
+    print $OUTPUT @OUT;
     close $OUTPUT;
-    chmod 0755, "/tmp/" . $script;
+    chmod 0755, $file;
 }
