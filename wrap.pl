@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 use feature 'say';
+use Cwd;
+my $cwd=cwd();
 my @Wrap_scripts = <scripts/*>;
 say "Modifying:";
 say "\t" . $_ for @Wrap_scripts;
@@ -29,7 +31,7 @@ foreach my $script (@Wrap_scripts) {
     ) unless $c != @MOLECULE_FILE;
     splice @MOLECULE_FILE, $c, 0, @WRAP_FILE;
     $script =~ s/scripts\///g;
-    open my $OUTPUT, ">/tmp/" . $script;
+    open my $OUTPUT, ">$cwd/gen/" . $script;
     print $OUTPUT @MOLECULE_FILE;
     close $OUTPUT;
 }
