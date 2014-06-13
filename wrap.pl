@@ -34,4 +34,5 @@ foreach my $script (@Wrap_scripts) {
     open my $OUTPUT, ">$cwd/gen/" . $script;
     print $OUTPUT @MOLECULE_FILE;
     close $OUTPUT;
+    chmod 755, "$cwd/gen/" . $script;
 }
