@@ -7,4 +7,3 @@ enabled = true
 pkg = http://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/spike
 
-export ACCEPT_LICENSE="*"
