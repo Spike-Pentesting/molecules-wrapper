@@ -1,5 +1,27 @@
 #!/usr/bin/perl
+use strict;
+use warnings;
 use feature 'say';
+
+sub load_file($) {
+    my $file = shift;
+    open my $FILE, "<$file"
+        or die("Something went very wrong, cannot open $file");
+    my @LINES = <$FILE>;
+    close $FILE;
+    return @LINES;
+}
+
+sub write_file($@) {
+    my $file = shift @_;
+    my @OUT  = @_;
+    open my $OUTPUT, ">$file"
+        or die("Something went very wrong, cannot write $file");
+    print $OUTPUT @OUT;
+    close $OUTPUT;
+    chmod 0755, $file;
+}
+
 my @Wrap_scripts = <scripts/*>;
 say "Modifying:";
 say "\t" . $_ for @Wrap_scripts;
@@ -24,19 +46,3 @@ foreach my $script (@Wrap_scripts) {
     write_file( "/tmp/" . $script, @MOLECULE_FILE );
 }
 
-sub load_file($) {
-    my $file = shift;
-    open my $FILE, "<$file";
-    my @LINES = <$FILE>;
-    close $FILE;
-    return @LINES;
-}
-
-sub write_file($@) {
-    my $file = shift @_;
-    my @OUT  = @_;
-    open my $OUTPUT, ">$file";
-    print $OUTPUT @OUT;
-    close $OUTPUT;
-    chmod 0755, $file;
-}
