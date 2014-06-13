@@ -10,5 +10,5 @@ else
     git clone https://github.com/Sabayon/molecules
 fi
 ARCH="${1}"
-"$(pwd)"/build.pl
+"$(pwd)"/wrap.pl
 molecule specs/spike-pentesting-"${ARCH}".spec
