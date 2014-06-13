@@ -1,33 +1,19 @@
-#!/bin/bash
+if [ "${1}" = "lxde" ]; then
 
-/usr/sbin/env-update
-. /etc/profile
+elif [ "${1}" = "mate" ]; then
 
+elif [ "${1}" = "e17" ]; then
+	genmenu.py -e
+elif [ "${1}" = "xfce" ]; then
 
-prepare_system() {
-	local de="${1}"
-	if [ "${de}" = "lxde" ]; then
+elif [ "${1}" = "fluxbox" ]; then
 
-	elif [ "${de}" = "mate" ]; then
+elif [ "${1}" = "gnome" ]; then
 
-	elif [ "${de}" = "e17" ]; then
-		genmenu.py -e
-	elif [ "${de}" = "xfce" ]; then
+elif [ "${1}" = "xfceforensic" ]; then
 
-	elif [ "${de}" = "fluxbox" ]; then
+elif [ "${1}" = "kde" ]; then
 
-	elif [ "${de}" = "gnome" ]; then
+elif [ "${1}" = "awesome" ]; then
 
-	elif [ "${de}" = "xfceforensic" ]; then
-
-	elif [ "${de}" = "kde" ]; then
-
-	elif [ "${de}" = "awesome" ]; then
-
-	fi
-}
-
-
-prepare_system "${1}"
-"${SABAYON_MOLECULE_HOME}"/scripts/remaster_generic_inner_chroot_script_after.sh "${1}"
-exit 0
+fi
