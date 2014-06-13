@@ -38,6 +38,9 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # Destination directory for the ISO image path (MANDATORY)
 %env destination_iso_directory: ${SABAYON_MOLECULE_HOME:-/sabayon}/../molecules_isos
 
+
+%env inner_source_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/inner_source_chroot_update.sh
+
 # Custom shell call to packages removal (default is: equo remove)
 # custom_packages_remove_cmd:
 
