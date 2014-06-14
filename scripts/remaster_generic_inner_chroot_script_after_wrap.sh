@@ -18,3 +18,5 @@ elif [ "${1}" = "kde" ]; then
 elif [ "${1}" = "awesome" ]; then
 	echo "AWESOME build!"
 fi
+
+rm -rfv /etc/entropy/packages/license.accept
