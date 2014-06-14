@@ -19,4 +19,5 @@ elif [ "${1}" = "awesome" ]; then
 	echo "AWESOME build!"
 fi
 
-rm -rfv /etc/entropy/packages/license.accept
+#rm -rfv /etc/entropy/packages/license.accept
+mv /etc/portage/make.conf.bak /etc/portage/make.conf
