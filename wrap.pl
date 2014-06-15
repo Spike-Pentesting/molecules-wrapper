@@ -46,8 +46,6 @@ foreach my $script (@Wrap_scripts) {
     $Molecules_script = "molecules/" . $Molecules_script;
     my @MOLECULE_FILE = load_file($Molecules_script);
     my @WRAP_FILE     = load_file($script);
-    my $c             = 0;
-    my $counter       = 0;
     my $guard         = quotemeta("/etc/profile");      #put at the start
     my $guard_2       = qr/exit 0/;                     #put at the end
     say "Molecules file <$Molecules_script> is " . @MOLECULE_FILE . " lines";
