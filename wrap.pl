@@ -22,6 +22,20 @@ sub write_file($@) {
     chmod 0755, $file;
 }
 
+sub get_index($@) {
+    my $guard   = shift @_;
+    my @ARRAY   = @_;
+    my $counter = 0;
+    (   $_ =~ $guard
+        ? ( say( "\tFound $guard at " . $counter . ", good" )
+                and $counter++
+                and last )
+        : $counter++
+    ) for (@ARRAY);    #calculating $guard index
+    return (scalar @ARRAY)+1 if($counter==@ARRAY);
+    return $counter;
+}
+
 my @Wrap_scripts = <scripts/*>;
 say "Modifying:";
 say "\t" . $_ for @Wrap_scripts;
@@ -34,33 +48,30 @@ foreach my $script (@Wrap_scripts) {
     my @WRAP_FILE     = load_file($script);
     my $c             = 0;
     my $counter       = 0;
-    my $guard         = quotemeta("/etc/profile");
-    my $guard_2       = qr/exit 0/;
+    my $guard         = quotemeta("/etc/profile");      #put at the start
+    my $guard_2       = qr/exit 0/;                     #put at the end
     say "Molecules file <$Molecules_script> is " . @MOLECULE_FILE . " lines";
-    (   $_ =~ $guard
-        ? ( say( "\tFound $guard at " . $c . ", good" ) and $c++ and last )
-        : $c++
-    ) for (@MOLECULE_FILE);
-    (   $_ =~ $guard_2
-        ? ( say( "\tFound $guard_2 at " . $counter . ", good" )
-                and $counter++
-                and last )
-        : $counter++
-    ) for ( reverse @MOLECULE_FILE );
+    my $c = get_index( $guard, @MOLECULE_FILE );    #calculating $guard index
+    my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
+        ;    #calculating $guard_2 index
     $counter = scalar(@MOLECULE_FILE) - $counter;
-    $counter = @MOLECULE_FILE if ( $counter == 0 );
-    my $split_array = 0;
-    ( $_ =~ quotemeta("######END######")
-        ? ( say "\tFound another hook on file at $split_array" and last )
-        : $split_array++ )
-        for (@WRAP_FILE);
-
+    $counter = @MOLECULE_FILE
+        if ( $counter == 0 );    #Resetting index, since we reversed the array
+    my $split_array = get_index( quotemeta("######END######"), @WRAP_FILE )
+        ;                        # calculating index of the ###END### tag
+    $split_array--;
+    say "\t Splitting array at $split_array";
     my @WRAP_FILE_2 = splice @WRAP_FILE, $split_array,
-        ( ( scalar @WRAP_FILE ) - $split_array ); #Divide arrays, start from -> ##END##
+        ( ( scalar @WRAP_FILE ) - $split_array )
+        ;                        #Divide arrays, using ##END## as pivot
     die("\tSomething went wrong with $Molecules_script, i could not find $guard in molecules scripts"
-    ) unless $c != @MOLECULE_FILE;
-    splice @MOLECULE_FILE, $c, 0, @WRAP_FILE; # Put the first part inside the first index
-    splice @MOLECULE_FILE, $counter + @WRAP_FILE, 0, @WRAP_FILE_2; #Put the second part at the second guard
+        )
+        unless $c != @MOLECULE_FILE
+        ;    #At least, we should find $guard , $guard_2 is not necessary
+    splice @MOLECULE_FILE, $c, 0,
+        @WRAP_FILE;    # Put the first part inside the first index
+    splice @MOLECULE_FILE, $counter + @WRAP_FILE, 0,
+        @WRAP_FILE_2;    #Put the second part at the second guard
 
     $script =~ s/scripts\///g;
     write_file( "/tmp/" . $script, @MOLECULE_FILE );
