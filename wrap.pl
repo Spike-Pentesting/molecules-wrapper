@@ -32,7 +32,7 @@ sub get_index($@) {
                 and last )
         : $counter++
     ) for (@ARRAY);    #calculating $guard index
-    return (scalar @ARRAY)+1 if($counter==@ARRAY);
+    return ( scalar @ARRAY ) + 1 if ( $counter == @ARRAY );
     return $counter;
 }
 
@@ -54,16 +54,18 @@ foreach my $script (@Wrap_scripts) {
     my $c = get_index( $guard, @MOLECULE_FILE );    #calculating $guard index
     my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
         ;    #calculating $guard_2 index
-    $counter = scalar(@MOLECULE_FILE) - $counter;
-    $counter = @MOLECULE_FILE
-        if ( $counter == 0 );    #Resetting index, since we reversed the array
+    $counter
+        = ( $counter == 0 )
+        ? scalar(@MOLECULE_FILE)
+        : ( scalar(@MOLECULE_FILE) - $counter )
+        ;    #Resetting index, since we reversed the array
     my $split_array = get_index( quotemeta("######END######"), @WRAP_FILE )
-        ;                        # calculating index of the ###END### tag
+        ;    # calculating index of the ###END### tag
     $split_array--;
     say "\t Splitting array at $split_array";
     my @WRAP_FILE_2 = splice @WRAP_FILE, $split_array,
         ( ( scalar @WRAP_FILE ) - $split_array )
-        ;                        #Divide arrays, using ##END## as pivot
+        ;    #Divide arrays, using ##END## as pivot
     die("\tSomething went wrong with $Molecules_script, i could not find $guard in molecules scripts"
         )
         unless $c != @MOLECULE_FILE
