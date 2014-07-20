@@ -1,3 +1,4 @@
+xfceforensic_remove_skel_stuff()
 
 if [ "${1}" = "lxde" ]; then
 	echo "LXDE build!"

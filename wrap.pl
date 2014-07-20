@@ -47,16 +47,20 @@ foreach my $script (@Wrap_scripts) {
     my @MOLECULE_FILE = load_file($Molecules_script);
     my @WRAP_FILE     = load_file($script);
     my $guard         = quotemeta("/etc/profile");      #put at the start
+   # my $backup_guard  = quotemeta("#!/bin/bash");
     my $guard_2       = qr/exit 0/;                     #put at the end
     say "Molecules file <$Molecules_script> is " . @MOLECULE_FILE . " lines";
     my $c = get_index( $guard, @MOLECULE_FILE );    #calculating $guard index
-    my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
-        ;    #calculating $guard_2 index
-    $counter
-        = ( $counter == 0 )
-        ? scalar(@MOLECULE_FILE)
-        : ( scalar(@MOLECULE_FILE) - $counter )
-        ;    #Resetting index, since we reversed the array
+    #$c = get_index( $backup_guard, @MOLECULE_FILE )
+     #   if ( ( $c - 1 ) == @MOLECULE_FILE );
+   # my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
+     #    ;    #calculating $guard_2 index
+     my $counter=@MOLECULE_FILE;
+  #  $counter
+    #    = ( $counter == 0 )
+     #   ? scalar(@MOLECULE_FILE)
+    #   : ( scalar(@MOLECULE_FILE) - $counter )
+      #  ;    #Resetting index, since we reversed the array
     my $split_array = get_index( quotemeta("######END######"), @WRAP_FILE )
         ;    # calculating index of the ###END### tag
     $split_array--;
