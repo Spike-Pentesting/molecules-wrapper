@@ -1,4 +1,4 @@
-#echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
+echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
