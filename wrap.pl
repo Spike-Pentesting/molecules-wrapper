@@ -53,14 +53,14 @@ foreach my $script (@Wrap_scripts) {
     my $c = get_index( $guard, @MOLECULE_FILE );    #calculating $guard index
     #$c = get_index( $backup_guard, @MOLECULE_FILE )
      #   if ( ( $c - 1 ) == @MOLECULE_FILE );
-   # my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
-     #    ;    #calculating $guard_2 index
-     my $counter=@MOLECULE_FILE;
-  #  $counter
-    #    = ( $counter == 0 )
-     #   ? scalar(@MOLECULE_FILE)
-    #   : ( scalar(@MOLECULE_FILE) - $counter )
-      #  ;    #Resetting index, since we reversed the array
+    my $counter = get_index( $guard_2, reverse @MOLECULE_FILE )
+         ;    #calculating $guard_2 index
+#     my $counter=@MOLECULE_FILE;
+    $counter
+      = ( $counter == 0 )
+     ? scalar(@MOLECULE_FILE)
+     : ( scalar(@MOLECULE_FILE) - $counter )
+     ;    #Resetting index, since we reversed the array
     my $split_array = get_index( quotemeta("######END######"), @WRAP_FILE )
         ;    # calculating index of the ###END### tag
     $split_array--;
