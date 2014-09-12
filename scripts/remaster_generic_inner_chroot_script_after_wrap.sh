@@ -6,6 +6,7 @@ elif [ "${1}" = "mate" ]; then
 	echo "Mate build!"
 elif [ "${1}" = "e17" ]; then
 	genmenu.py -e
+	sed -i '/lxdm-greeter-gtk/ a\\nlast_session=enlightenment.desktop\nlast_lang=' /etc/lxdm/lxdm.conf
 elif [ "${1}" = "xfce" ]; then
 	echo "XFCE build!"
 elif [ "${1}" = "fluxbox" ]; then
@@ -23,3 +24,4 @@ fi
 ######END######
 
 rm -rfv /etc/entropy/packages/license.accept
+

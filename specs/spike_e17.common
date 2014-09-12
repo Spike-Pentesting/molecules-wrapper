@@ -37,6 +37,8 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # Pre-ISO building script. Hook to be able to copy kernel images in place, for example
 %env pre_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_pre_iso_script.sh "Spike E17"
 
+%env post_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_post_iso_script.sh
+
 # Destination directory for the ISO image path (MANDATORY)
 %env destination_iso_directory: ${SABAYON_MOLECULE_HOME:-/sabayon}/../molecules_isos
 
@@ -49,51 +51,50 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # List of packages that would be added from chrooted system (comma separated)
 packages_to_add:
 	@X,
+        sys-apps/gpu-detector,
+#        @e17,
+#        @fluxbox,
+        app-admin/rigo,
+        app-crypt/gnupg,
+        app-crypt/pinentry-gtk2,
+        app-editors/leafpad,
+        app-text/pastebunz,
+        dev-libs/fribidi,
+        games-misc/cowsay,
+        gnome-extra/nm-applet-gtk2,
+        x11-misc/lightdm,
+# lxdm seems to not automatically boot e17: lxde-base/lxdm removed, swapped with lightdm
+        lxde-base/lxpolkit,
+        media-fonts/corefonts,
+        media-fonts/dejavu,
+        media-fonts/ttf-bitstream-vera,
+        media-gfx/ristretto,
+        media-plugins/alsa-plugins,
+        media-sound/xnoise,
+        net-dialup/rp-pppoe,
+        net-irc/hexchat,
+        net-p2p/transmission-gtk,
+        sys-apps/gnome-disk-utility,
+        sys-apps/gpu-detector,
+        sys-auth/consolekit,
+        sys-block/parted,
+        sys-fs/ntfs3g,
+        sys-power/cpufrequtils,
+        www-client/midori,
+        x11-libs/gksu,
+        x11-misc/magneto-gtk,
+        x11-terms/terminology,
+        x11-terms/xterm,
+        x11-themes/equinox-themes,
+        x11-themes/gtk-engines-xfce,
+        x11-themes/tango-icon-theme,
+        x11-themes/gnome-icon-theme,
+        x11-themes/gtk-engines:2,
+        x11-themes/sabayon-artwork-gnome
 	app-misc/sabayon-live,
 	spike/spike-enlightenment,
-	spike/spike,
-	sys-apps/gpu-detector,
-	@fluxbox,
-	@wireless,
-	app-admin/rigo,
-	app-crypt/gnupg,
-	app-crypt/pinentry-gtk2,
-	app-editors/leafpad,
-	app-misc/anaconda-runtime-gui,
-	app-text/epdf,
-	app-text/pastebunz,
-	dev-libs/fribidi,
-	games-misc/cowsay,
-	gnome-extra/nm-applet-gtk2,
-	lxde-base/lxdm,
-	lxde-base/lxpolkit,
-	lxde-base/lxterminal,
-	media-fonts/corefonts,
-	media-fonts/dejavu,
-	media-fonts/ttf-bitstream-vera,
-	media-gfx/ristretto,
-	media-plugins/alsa-plugins,
-	media-sound/xnoise,
-	net-dialup/rp-pppoe,
-	net-im/pidgin,
-	net-irc/hexchat,
-	net-p2p/transmission-gtk,
-	sys-apps/gnome-disk-utility,
-	sys-apps/gpu-detector,
-	sys-auth/consolekit,
-	sys-block/parted,
-	sys-fs/ntfs3g,
-	sys-power/cpufrequtils,
-	www-client/midori,
-	x11-libs/gksu,
-	x11-misc/magneto-gtk,
-	x11-terms/xterm,
-	x11-themes/equinox-themes,
-	x11-themes/gtk-engines-xfce,
-	x11-themes/tango-icon-theme,
-	x11-themes/gnome-icon-theme,
-	x11-themes/gtk-engines:2,
-	x11-themes/sabayon-artwork-gnome
+	spike/spike
+
 
 # Determine whether repositories update should be run (if packages_to_add is set)
 # (default is: no), values are: yes, no.
