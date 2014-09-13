@@ -12,6 +12,7 @@ fi
 ARCH="${1}"
 export ISO_TAG="${2}" #14.05, DAILY
 export BASE_VERSION="${3}" #Minimal, SpinBase
+FLAVOR="${4}"
 
 "$(pwd)"/wrap.pl
-molecule specs/spike-pentesting-"${ARCH}".spec
+molecule specs/spike-pentesting-"${ARCH}"-"${FLAVOR}".spec
