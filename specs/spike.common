@@ -1,18 +1,23 @@
 
 # List of packages common by spike flavors
 packages_to_add:
-	@X,
-        sys-apps/gpu-detector,
+        @X,
+        @wireless,
+        @gst-plugins,
+        @gst-plugins-extra,
         app-admin/rigo,
         app-crypt/gnupg,
         app-crypt/pinentry-gtk2,
         app-editors/leafpad,
         app-text/pastebunz,
+        app-arch/unrar,
         dev-libs/fribidi,
         games-misc/cowsay,
-        gnome-extra/nm-applet-gtk2,
+        sys-fs/ntfs3g,
         x11-misc/lightdm,
-# lxdm seems to not automatically boot e17: lxde-base/lxdm removed, swapped with lightdm
+        # lxdm seems to not automatically boot e17: lxde-base/lxdm removed, swapped with lightdm
+        x11-misc/lightdm-base,
+        x11-misc/lightdm-gtk-greeter,
         lxde-base/lxpolkit,
         media-fonts/corefonts,
         media-fonts/dejavu,
@@ -26,6 +31,7 @@ packages_to_add:
         sys-apps/gnome-disk-utility,
         sys-apps/gpu-detector,
         sys-auth/consolekit,
+        sys-block/gparted,
         sys-block/parted,
         sys-fs/ntfs3g,
         sys-power/cpufrequtils,
@@ -37,10 +43,12 @@ packages_to_add:
         x11-themes/equinox-themes,
         x11-themes/gtk-engines-xfce,
         x11-themes/tango-icon-theme,
+        x11-themes/iottinka-artwork,
+        x11-themes/gnome-themes-standard,
         x11-themes/gnome-icon-theme,
         x11-themes/gtk-engines:2,
         x11-themes/sabayon-artwork-gnome
-	app-misc/sabayon-live,
-	spike/spike,
-	spike/spike-menu
+        app-misc/sabayon-live,
+        spike/spike,
+        spike/spike-menu
 
