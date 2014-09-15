@@ -1,3 +1,5 @@
+packages_to_remove:
+        app-misc/sabayon-skel
 
 # List of packages common by spike flavors
 packages_to_add:
@@ -50,5 +52,6 @@ packages_to_add:
         x11-themes/sabayon-artwork-gnome
         app-misc/sabayon-live,
         spike/spike,
-        spike/spike-menu
+        spike/spike-menu,
+        spike/spike-skel
 
