@@ -6,11 +6,11 @@ elif [ "${1}" = "mate" ]; then
 	echo "Mate build!"
 elif [ "${1}" = "e17" ]; then
 	echo "Enlightenment BUILD!"
-	genmenu.py -e
+	#genmenu.py -e
 	#sed -i '/lxdm-greeter-gtk/ a\\nlast_session=enlightenment.desktop\nlast_lang=' /etc/lxdm/lxdm.conf
 elif [ "${1}" = "xfce" ]; then
 	echo "XFCE build!"
-	genmenu.py -x
+	#genmenu.py -x
 elif [ "${1}" = "fluxbox" ]; then
 	echo "FLUXBOX build!"
 elif [ "${1}" = "gnome" ]; then
@@ -26,4 +26,6 @@ fi
 ######END######
 
 rm -rfv /etc/entropy/packages/license.accept
+plymouth-set-default-theme spike
+genkernel --plymouth-theme=spike  --luks initramfs
 

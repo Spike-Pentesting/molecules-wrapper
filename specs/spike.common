@@ -36,6 +36,7 @@ packages_to_add:
         sys-block/gparted,
         sys-block/parted,
         sys-fs/ntfs3g,
+        sys-kernel/genkernel-next,
         sys-power/cpufrequtils,
         www-client/midori,
         x11-libs/gksu,
@@ -49,7 +50,9 @@ packages_to_add:
         x11-themes/gnome-themes-standard,
         x11-themes/gnome-icon-theme,
         x11-themes/gtk-engines:2,
-        x11-themes/sabayon-artwork-gnome
+        spike/spike-artwork-gnome,
+        spike/spike-artwork-core,
+        spike/spike-artwork-grub,
         app-misc/sabayon-live,
         spike/spike,
         spike/spike-menu,
