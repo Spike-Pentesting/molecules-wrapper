@@ -56,5 +56,6 @@ packages_to_add:
         app-misc/sabayon-live,
         spike/spike,
         spike/spike-menu,
-        spike/spike-skel
+        spike/spike-skel,
+	sys-devel/gcc
 
