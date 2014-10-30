@@ -26,6 +26,6 @@ fi
 ######END######
 
 rm -rfv /etc/entropy/packages/license.accept
-plymouth-set-default-theme spike
-genkernel --plymouth-theme=spike  --luks initramfs
+# plymouth-set-default-theme spike
+# genkernel --plymouth-theme=spike  --luks initramfs
 

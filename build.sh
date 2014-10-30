@@ -16,3 +16,4 @@ FLAVOR="${4}"
 
 "$(pwd)"/wrap.pl
 molecule specs/spike-pentesting-"${ARCH}"-"${FLAVOR}".spec
+sudo rm -rfv '/var/tmp/molecule*'
