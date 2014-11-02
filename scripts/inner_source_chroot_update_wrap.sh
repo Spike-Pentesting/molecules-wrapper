@@ -11,6 +11,20 @@ pkg = http://repository.spike-pentesting.org
 rsync -av -H -A -X --delete-during "rsync://rsync.at.gentoo.org/gentoo-portage/licenses/" "/usr/portage/licenses/"
 ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ######END######
 
 # check if a kernel update is needed

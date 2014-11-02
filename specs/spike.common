@@ -61,5 +61,5 @@ packages_to_add:
         spike/spike,
         spike/spike-menu,
         spike/spike-skel,
-	sys-devel/gcc
+        sys-devel/gcc
 

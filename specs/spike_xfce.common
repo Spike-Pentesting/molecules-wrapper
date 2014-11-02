@@ -35,7 +35,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 %env error_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_error_script.sh
 
 # Pre-ISO building script. Hook to be able to copy kernel images in place, for example
-%env pre_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_pre_iso_script.sh "Spike Xfce"
+%env pre_iso_script: /tmp/generic_pre_iso_script_wrap.sh "Xfce"
 
 %env post_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_post_iso_script.sh
 
