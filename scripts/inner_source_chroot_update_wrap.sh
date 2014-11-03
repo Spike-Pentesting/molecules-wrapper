@@ -10,22 +10,10 @@ pkg = http://repository.spike-pentesting.org
 #grub2-mkconfig -o /boot/grub/grub.cfg
 rsync -av -H -A -X --delete-during "rsync://rsync.at.gentoo.org/gentoo-portage/licenses/" "/usr/portage/licenses/"
 ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+equo remove "app-misc/sabayon-skel" || exit 1
 
 ######END######
+
 
 # check if a kernel update is needed
 kernel_target_pkg="sys-kernel/linux-spike"
