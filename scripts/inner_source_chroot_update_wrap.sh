@@ -17,7 +17,6 @@ done
 
 ######END######
 
-
 # check if a kernel update is needed
 kernel_target_pkg="sys-kernel/linux-spike"
 
