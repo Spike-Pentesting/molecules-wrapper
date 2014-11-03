@@ -27,6 +27,8 @@ ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
 
 ######END######
 
+equo remove "app-misc/sabayon-skel" || exit 1
+
 # check if a kernel update is needed
 kernel_target_pkg="sys-kernel/linux-spike"
 
