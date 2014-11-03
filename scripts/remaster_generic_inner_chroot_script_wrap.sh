@@ -10,3 +10,8 @@ pkg = http://repository.spike-pentesting.org
 #grub2-mkconfig -o /boot/grub/grub.cfg
 rsync -av -H -A -X --delete-during "rsync://rsync.at.gentoo.org/gentoo-portage/licenses/" "/usr/portage/licenses/"
 ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
+
+for PKG in sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon
+equo mask $PKG
+equo remove $PKG --nodeps
+done
