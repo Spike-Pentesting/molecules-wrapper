@@ -23,11 +23,8 @@ elif [ "${1}" = "awesome" ]; then
 	echo "AWESOME build!"
 fi
 
-for PKG in sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon
-equo mask $PKG
-equo remove $PKG --nodeps
-done
-
+equo mask sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon
+equo remove sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon --nodeps
 
 ######END######
 
