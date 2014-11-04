@@ -14,6 +14,7 @@ ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
 equo mask sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon
 equo remove sabayon-artwork-core sabayon-artwork-grub sabayon-artwork-isolinux sabayon-skel sabayon-artwork-lxde linux-sabayon --nodeps
 
+
 ######END######
 
 # check if a kernel update is needed
