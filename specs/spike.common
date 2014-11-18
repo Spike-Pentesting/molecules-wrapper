@@ -16,6 +16,8 @@ packages_to_add:
         app-editors/leafpad,
         app-text/pastebunz,
         app-arch/unrar,
+	app-misc/screenfetch,
+	app-shells/zsh,
         dev-libs/fribidi,
         games-misc/cowsay,
         sys-fs/ntfs3g,
@@ -61,5 +63,5 @@ packages_to_add:
         spike/spike,
         spike/spike-menu,
         spike/spike-skel,
-        sys-devel/gcc
-
+        sys-devel/gcc,
+	x11-terms/terminator	
