@@ -27,6 +27,17 @@ fi
 ######END######
 
 rm -rfv /etc/entropy/packages/license.accept
+chsh -s /bin/zsh sabayonuser
 # plymouth-set-default-theme spike
 # genkernel --plymouth-theme=spike  --luks initramfs
+
+echo '
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/zsh
+SKEL=/etc/skel
+' > /etc/default/useradd
 
