@@ -28,7 +28,6 @@ fi
 
 rm -rfv /etc/entropy/packages/license.accept
 chsh -s /bin/zsh sabayonuser
-# plymouth-set-default-theme spike
 # genkernel --plymouth-theme=spike  --luks initramfs
 
 echo '
@@ -40,4 +39,5 @@ EXPIRE=
 SHELL=/bin/zsh
 SKEL=/etc/skel
 ' > /etc/default/useradd
-
+#set default plymouth theme
+plymouth-set-default-theme spike
