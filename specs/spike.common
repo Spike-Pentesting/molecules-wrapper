@@ -2,7 +2,8 @@ packages_to_remove:
         x11-themes/sabayon-artwork-core,
         x11-themes/sabayon-artwork-gnome,
         x11-themes/sabayon-artwork-isolinux,
-        app-misc/sabayon-skel
+        app-misc/sabayon-skel,
+        app-misc/sabayon-version
 
 # List of packages common by spike flavors
 packages_to_add:
@@ -16,8 +17,8 @@ packages_to_add:
         app-editors/leafpad,
         app-text/pastebunz,
         app-arch/unrar,
-	app-misc/screenfetch,
-	app-shells/zsh,
+        app-misc/screenfetch,
+        app-shells/zsh,
         dev-libs/fribidi,
         games-misc/cowsay,
         sys-fs/ntfs3g,
@@ -64,4 +65,5 @@ packages_to_add:
         spike/spike-menu,
         spike/spike-skel,
         sys-devel/gcc,
-	x11-terms/terminator	
+        x11-terms/terminator,
+        spike/spike-version
