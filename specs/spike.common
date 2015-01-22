@@ -60,7 +60,7 @@ packages_to_add:
         spike/spike-artwork-core,
         spike/spike-artwork-grub,
         spike/spike-artwork-isolinux,
-        app-misc/sabayon-live,
+        spike/spike-live,
         spike/spike,
         spike/spike-menu,
         spike/spike-skel,
