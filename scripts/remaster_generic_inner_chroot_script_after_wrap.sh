@@ -43,9 +43,12 @@ SKEL=/etc/skel
 #plymouth-set-default-theme spike
 
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
-equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live grub sabayon-artwork-gnom --nodeps
+equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live grub sabayon-artwork-gnome --nodeps
 #equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
 equo remove linux-sabayon --nodeps --configfiles
 equo remove --force-system sabayon-version --configfiles
 equo mask sabayon-version
 equo install spike-version --nodeps
+
+equo install sys-boot/grub::spike
+
