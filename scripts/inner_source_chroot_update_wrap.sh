@@ -1,5 +1,40 @@
 #echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
 
+rm -rfv /etc/entropy/repositories.conf.d/entropy_weekly
+echo '[sabayonlinux.org]
+desc = Sabayon Linux Official Repository
+repo = http://pkg.sabayon.org#bz2
+repo = http://pkg.repo.sabayon.org#bz2
+enabled = true
+pkg = http://mirror.umd.edu/sabayonlinux/entropy
+pkg = http://mirror.freelydifferent.com/sabayon/entropy
+pkg = http://dl.sabayon.org/entropy
+pkg = http://bali.idrepo.or.id/sabayon/entropy
+pkg = http://ftp.sh.cvut.cz/MIRRORS/sabayon/entropy
+pkg = http://madura.idrepo.or.id/sabayon/entropy
+pkg = http://sumbawa.idrepo.or.id/sabayon/entropy
+pkg = http://www2.itti.ifce.edu.br/sabayon/entropy
+pkg = http://riksun.riken.go.jp/pub/pub/Linux/sabayon/entropy
+pkg = http://ftp.yz.yamagata-u.ac.jp/pub/linux/sabayonlinux/entropy
+pkg = ftp://ftp.klid.dk/sabayonlinux/entropy
+pkg = http://best.sabayon.org/entropy
+pkg = http://cross-lfs.sabayonlinux.org/entropy
+pkg = http://redir.sabayon.org/entropy
+pkg = http://ftp.fsn.hu/pub/linux/distributions/sabayon/entropy
+pkg = http://ftp.surfnet.nl/pub/os/Linux/distr/sabayonlinux/entropy
+pkg = http://ftp.cc.uoc.gr/mirrors/linux/SabayonLinux/entropy
+pkg = http://mirror.internode.on.net/pub/sabayon/entropy
+pkg = http://sabayon.c3sl.ufpr.br/entropy
+pkg = http://ftp.kddilabs.jp/Linux/packages/sabayonlinux/entropy
+pkg = http://mirror.yandex.ru/sabayon/entropy
+pkg = ftp://ftp.nluug.nl/pub/os/Linux/distr/sabayonlinux/entropy
+pkg = http://debian.mirror.dkm.cz/sabayon/entropy
+pkg = http://ftp.rnl.ist.utl.pt/pub/sabayon/entropy
+pkg = http://mirror.clarkson.edu/sabayon/entropy
+pkg = http://na.mirror.garr.it/mirrors/sabayonlinux/entropy
+pkg = http://pkg.sabayon.org
+' >> /etc/entropy/repositories.conf.d/entropy_sabayonlinux.org
+
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
 repo = https://repository.spike-pentesting.org#bz2
@@ -14,7 +49,6 @@ ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
 
 
 ######END######
-
 # check if a kernel update is needed
 kernel_target_pkg="sys-kernel/linux-spike"
 
@@ -24,6 +58,8 @@ echo "@@ Upgrading kernel to ${available_kernel}"
 echo
 safe_run kernel-switcher switch "${available_kernel}" || exit 1
 equo remove "sys-kernel/linux-sabayon" || exit 1
+safe_run kernel-switcher switch "${available_kernel}" || exit 1
+
 # now delete stale files in /lib/modules
 for slink in $(find /lib/modules/ -type l); do
     if [ ! -e "${slink}" ]; then
