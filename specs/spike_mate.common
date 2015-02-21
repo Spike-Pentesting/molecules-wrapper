@@ -9,7 +9,7 @@ release_string: Spike Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Spike Enlightenment
+iso_title: Spike MATE
 
 # Enable XZ compression in mksquashfs
 extra_mksquashfs_parameters: -comp xz -Xbcj x86
@@ -25,7 +25,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
-%env inner_chroot_script_after: /tmp/remaster_generic_inner_chroot_script_after_wrap.sh xfce
+%env inner_chroot_script_after: /tmp/remaster_generic_inner_chroot_script_after_wrap.sh mate
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and AFTER inner_chroot_script)
@@ -35,7 +35,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 %env error_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_error_script.sh
 
 # Pre-ISO building script. Hook to be able to copy kernel images in place, for example
-%env pre_iso_script: /tmp/generic_pre_iso_script_wrap.sh "Xfce"
+%env pre_iso_script: /tmp/generic_pre_iso_script_wrap.sh "MATE"
 
 %env post_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_post_iso_script.sh
 
