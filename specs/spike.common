@@ -63,5 +63,4 @@ packages_to_add:
         spike/spike-menu,
         spike/spike-skel,
         sys-devel/gcc,
-        x11-terms/terminator,
-        spike/spike-version
+        x11-terms/terminator

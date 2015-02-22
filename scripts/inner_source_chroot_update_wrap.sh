@@ -166,7 +166,7 @@ safe_run equo update --force || exit 1
 
 # metasploit still targets ruby19
 
-    masks=(=dev-ruby/actionpack-4.2.0@sabayonlinux.org
+    masks=(=dev-ruby/act3ionpack-4.2.0@sabayonlinux.org
 =dev-ruby/activesupport-4.2.0@sabayonlinux.org
 =dev-ruby/rails-html-sanitizer-1.0.1@sabayonlinux.org
 =dev-ruby/rails-dom-testing-1.0.5@sabayonlinux.org
@@ -192,7 +192,6 @@ equo upgrade --purge || exit 1
 
 equo install sys-boot/grub::spike
 
-equo install  --multifetch 10 spike/spike::spike
 
 
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
@@ -201,7 +200,7 @@ equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux s
 equo remove linux-sabayon --nodeps --configfiles
 equo remove --force-system sabayon-version --configfiles
 equo mask sabayon-version
-equo install spike-version --nodeps
+equo install  --multifetch 10 spike/spike::spike
 equo query list installed -qv > /etc/sabayon-pkglist
 
 
