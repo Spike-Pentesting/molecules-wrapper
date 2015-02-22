@@ -70,7 +70,7 @@ REPLACEMENT=">=sys-apps/openrc-0.9@sabayon-limbo
 >=x11-themes/sabayon-artwork-extra-1@sabayon-weekly
 >=x11-themes/sabayon-artwork-extra-1@sabayonlinux.org
 >=x11-themes/sabayon-artwork-extra-1@sabayon-limbo
->=x11-themes/sabayon-artwork-gnome-1@sabayon-weekly
+>=x11-themes/sabayon-artwor-gnome-1@sabayon-weekly
 >=x11-themes/sabayon-artwork-gnome-1@sabayonlinux.org
 >=x11-themes/sabayon-artwork-gnome-1@sabayon-limbo
 >=x11-themes/sabayon-artwork-grub-1@sabayon-weekly
@@ -90,7 +90,19 @@ REPLACEMENT=">=sys-apps/openrc-0.9@sabayon-limbo
 >=x11-themes/sabayon-artwork-lxde-1@sabayon-limbo
 >=app-misc/anaconda-runtime-1.1-r1@sabayon-weekly
 >=app-misc/anaconda-runtime-1.1-r1@sabayonlinux.org
->=app-misc/anaconda-runtime-1.1-r1@sabayon-limbo"
+>=app-misc/anaconda-runtime-1.1-r1@sabayon-limbo
+=dev-ruby/actionpack-4.2.0@sabayonlinux.org
+=dev-ruby/activesupport-4.2.0@sabayonlinux.org
+=dev-ruby/rails-html-sanitizer-1.0.1@sabayonlinux.org
+=dev-ruby/rails-dom-testing-1.0.5@sabayonlinux.org
+=dev-ruby/activemodel-4.2.0@sabayonlinux.org
+=dev-ruby/rails-deprecated_sanitizer-1.0.3@sabayonlinux.org
+=dev-ruby/activerecord-4.2.0@sabayonlinux.org
+=dev-ruby/loofah-2.0.1@sabayonlinux.org
+=dev-ruby/arel-6.0.0@sabayonlinux.org
+=dev-ruby/mime-types-2.4.3@sabayonlinux.org
+=dev-ruby/actionview-4.2.0@sabayonlinux.org
+"
 
 echo $REPLACEMENT >> /etc/entropy/packages/package.mask
 echo $REPLACEMENT >> /etc/entropy/packages/package.mask.d/package.mask
