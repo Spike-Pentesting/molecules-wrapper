@@ -89,7 +89,7 @@ packages_to_add:
 	net-wireless/bluez-hcidump,
 	sys-auth/consolekit,
 	sys-power/cpufrequtils,
-	www-client/chromium,
+	www-client/google-chrome,
 	www-plugins/chrome-binary-plugins,
 	x11-libs/gksu,
 	x11-libs/libva-intel-driver,

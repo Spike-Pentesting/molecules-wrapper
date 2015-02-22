@@ -55,7 +55,8 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 packages_to_add:
 	spike/spike-enlightenment,
             gnome-extra/nm-applet-gtk2,
-            gnome-extra/polkit-gnome
+            gnome-extra/polkit-gnome,
+            www-client/google-chrome
 
 
 # Determine whether repositories update should be run (if packages_to_add is set)
