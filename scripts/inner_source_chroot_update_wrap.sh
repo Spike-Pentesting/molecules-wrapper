@@ -166,7 +166,7 @@ safe_run equo update --force || exit 1
 
 # metasploit still targets ruby19
 
-    masks=(=dev-ruby/act3ionpack-4.2.0@sabayonlinux.org
+    masks=(=dev-ruby/actionpack-4.2.0@sabayonlinux.org
 =dev-ruby/activesupport-4.2.0@sabayonlinux.org
 =dev-ruby/rails-html-sanitizer-1.0.1@sabayonlinux.org
 =dev-ruby/rails-dom-testing-1.0.5@sabayonlinux.org
