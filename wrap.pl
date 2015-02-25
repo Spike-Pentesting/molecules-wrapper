@@ -41,6 +41,7 @@ say "Modifying:";
 say "\t" . $_ for @Wrap_scripts;
 
 foreach my $script (@Wrap_scripts) {
+    next if $scripts !~/\_wrap/;
     my $Molecules_script = $script;
     $Molecules_script =~ s/\_wrap//g;
     $Molecules_script = "molecules/" . $Molecules_script;
