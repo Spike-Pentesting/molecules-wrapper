@@ -1,5 +1,5 @@
 export SABAYON_MOLECULE_HOME=$(pwd)"/molecules"
-export SABAYON_RELEASE="1.0"
+export SABAYON_RELEASE="1.0a"
 
 
 if [ -d "${SABAYON_MOLECULE_HOME}" ]; then
