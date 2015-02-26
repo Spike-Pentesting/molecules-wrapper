@@ -4,7 +4,8 @@ export SABAYON_RELEASE="1.0a"
 
 if [ -d "${SABAYON_MOLECULE_HOME}" ]; then
     cd "${SABAYON_MOLECULE_HOME}"
-    git pull
+    git fetch --all
+    git reset --hard origin/master
     cd ..
 else
     git clone https://github.com/Sabayon/molecules
@@ -15,5 +16,7 @@ export BASE_VERSION="${3}" #Minimal, SpinBase
 FLAVOR="${4}"
 
 "$(pwd)"/wrap.pl
+cp -rfv "$(pwd)"/scripts/make_grub_efi.sh "$(pwd)"/molecules/scripts/make_grub_efi.sh
+chmod +x "$(pwd)"/molecules/scripts/make_grub_efi.sh
 molecule specs/spike-pentesting-"${ARCH}"-"${FLAVOR}".spec
 sudo rm -rfv '/var/tmp/molecule*'
