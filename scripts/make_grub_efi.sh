@@ -170,6 +170,7 @@ if [ -f "${efi_x86_64_file}" ] || [ -f "${efi_i386_file}" ]; then
             --output "${grub_efi_file}.signed" \
             "${grub_efi_file}" || exit 1
         mv "${grub_efi_file}.signed" "${grub_efi_file}" || exit 1
+	echo "Key signed!"
     elif [ ! -f "${sbsign_private_key}" ]; then
         echo "No private SecureBoot key file found at ${sbsign_private_key}" >&2
     fi
@@ -211,7 +212,7 @@ if [ -f "${efi_x86_64_file}" ] || [ -f "${efi_i386_file}" ]; then
 
     mkdir -p "${tmp_grub_dir}/SecureBoot" || exit 1
     cp "${sabayon_der}" "${tmp_grub_dir}/SecureBoot/" || exit 1
-
+    rm -rfv "${tmp_grub_dir}/SecureBoot/sabayon.cer"
     umount "${tmp_dir}" || exit 1
     rmdir "${tmp_dir}" # best effort
     exit 0
