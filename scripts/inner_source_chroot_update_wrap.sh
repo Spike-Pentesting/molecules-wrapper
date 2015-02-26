@@ -201,6 +201,9 @@ equo remove linux-sabayon --nodeps --configfiles
 equo remove --force-system sabayon-version --configfiles
 equo mask sabayon-version
 equo install  --multifetch 10 spike/spike::spike
+
+# ruby19 as default
+eselect ruby set ruby19
 equo query list installed -qv > /etc/sabayon-pkglist
 
 
