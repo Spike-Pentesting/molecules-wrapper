@@ -18,5 +18,8 @@ FLAVOR="${4}"
 "$(pwd)"/wrap.pl
 cp -rfv "$(pwd)"/scripts/make_grub_efi.sh "$(pwd)"/molecules/scripts/make_grub_efi.sh
 chmod +x "$(pwd)"/molecules/scripts/make_grub_efi.sh
+cp -rfv "$(pwd)"/scripts/generic_pre_iso_script.sh "$(pwd)"/molecules/scripts/generic_pre_iso_script.sh
+chmod +x "$(pwd)"/molecules/scripts/generic_pre_iso_script.sh
+
 molecule specs/spike-pentesting-"${ARCH}"-"${FLAVOR}".spec
 sudo rm -rfv '/var/tmp/molecule*'
