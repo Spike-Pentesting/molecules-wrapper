@@ -173,6 +173,9 @@ safe_run equo update --force || exit 1
 =dev-ruby/activemodel-4.2.0@sabayonlinux.org
 =dev-ruby/activerecord-4.2.0@sabayonlinux.org
 =dev-ruby/rails-deprecated_sanitizer-1.0.3@sabayonlinux.org
+=net-misc/networkmanager-1.0.0@sabayonlinux.org
+=gnome-extra/nm-applet-1.0.0@sabayonlinux.org
+sys-boot/grub@sabayonlinux.org
 =dev-ruby/loofah-2.0.1@sabayonlinux.org
 =dev-ruby/arel-6.0.0@sabayonlinux.org
 =dev-ruby/mime-types-2.4.3@sabayonlinux.org
