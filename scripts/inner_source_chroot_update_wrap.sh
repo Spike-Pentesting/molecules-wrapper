@@ -1,5 +1,7 @@
 #echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
 
+rm -rfv /etc/entropy/repositories.conf.d/*
+
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
 repo = https://repository.spike-pentesting.org#bz2
@@ -160,10 +162,7 @@ REPLACEMENT=">=sys-apps/openrc-0.9@sabayon-limbo
 >=app-misc/anaconda-runtime-1.1-r1@sabayon-limbo
 "
 
-
 safe_run equo update --force || exit 1
-
-
 # metasploit still targets ruby19
 
     masks=(=dev-ruby/actionpack-4.2.0@sabayonlinux.org
@@ -176,14 +175,21 @@ safe_run equo update --force || exit 1
 =net-misc/networkmanager-1.0.0@sabayonlinux.org
 =gnome-extra/nm-applet-1.0.0@sabayonlinux.org
 sys-boot/grub@sabayonlinux.org
+dev-ruby/rubygems@sabayonlinux.org
+dev-ruby/tzinfo@sabayonlinux.org
+dev-ruby/bundler@sabayonlinux.org
+dev-ruby/builder@sabayonlinux.org
 =dev-ruby/loofah-2.0.1@sabayonlinux.org
 =dev-ruby/arel-6.0.0@sabayonlinux.org
-=dev-ruby/mime-types-2.4.3@sabayonlinux.org
+dev-ruby/mime-types@sabayonlinux.org
 =dev-ruby/actionview-4.2.0@sabayonlinux.org)
 
     for mask in "${masks[@]}"; do
         equo mask ${mask}
     done
+
+
+
 
 echo $REPLACEMENT >> /etc/entropy/packages/package.mask
 #echo $REPLACEMENT >> /etc/entropy/packages/package.mask.d/package.mask

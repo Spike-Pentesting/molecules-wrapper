@@ -15,9 +15,16 @@ export ISO_TAG="${2}" #14.05, DAILY
 export BASE_VERSION="${3}" #Minimal, SpinBase
 FLAVOR="${4}"
 
+#cp -rfv "$(pwd)"/molecules/scripts/inner_source_chroot_update.sh "$(pwd)"/molecules/scripts/inner_source_chroot_update_dev.sh
+
+
 "$(pwd)"/wrap.pl
 cp -rfv "$(pwd)"/scripts/make_grub_efi.sh "$(pwd)"/molecules/scripts/make_grub_efi.sh
 chmod +x "$(pwd)"/molecules/scripts/make_grub_efi.sh
+
+cp -rfv "$(pwd)"/scripts/inner_source_chroot_update_dev.sh "$(pwd)"/molecules/scripts/inner_source_chroot_update_dev.sh
+chmod +x "$(pwd)"/molecules/scripts/inner_source_chroot_update_dev.sh
+
 cp -rfv "$(pwd)"/scripts/generic_pre_iso_script.sh "$(pwd)"/molecules/scripts/generic_pre_iso_script.sh
 chmod +x "$(pwd)"/molecules/scripts/generic_pre_iso_script.sh
 
