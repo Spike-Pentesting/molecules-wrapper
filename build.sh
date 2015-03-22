@@ -8,7 +8,7 @@ if [ -d "${SABAYON_MOLECULE_HOME}" ]; then
     git reset --hard origin/master
     cd ..
 else
-    git clone https://github.com/Sabayon/molecules
+    git clone https://github.com/Sabayon/molecules.git
 fi
 ARCH="${1}"
 export ISO_TAG="${2}" #14.05, DAILY

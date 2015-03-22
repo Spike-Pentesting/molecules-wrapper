@@ -31,6 +31,12 @@ img_id="${ts}${RANDOM}"
 ID_FILE_PREFIX="id."
 ID_FILE="${ID_FILE_PREFIX}${img_id}.uefi"
 
+rm -rfv "${CDROOT_DIR}/boot/sabayon.*"
+rm -rfv "${CDROOT_DIR}/boot/sabayon"
+rm -rfv "${CDROOT_DIR}/boot/sabayon.*.*"
+rm -rfv "${CDROOT_DIR}/boot/sabayon.igz"
+
+
 pre_iso_signal_handler() {
     for mount_dir in "${MOUNT_DIRS[@]}"; do
         if [ -d "${mount_dir}" ]; then

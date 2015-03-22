@@ -1,6 +1,42 @@
 #echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
 
+
 rm -rfv /etc/entropy/repositories.conf.d/*
+#rm -rfv /etc/entropy/repositories.conf.d/entropy_sabayon-weekly
+
+echo '[sabayonlinux.org]
+desc = Sabayon Linux Official Repository
+repo = http://pkg.sabayon.org#bz2
+repo = http://pkg.repo.sabayon.org#bz2
+enabled = true
+pkg = http://mirror.umd.edu/sabayonlinux/entropy
+pkg = http://mirror.freelydifferent.com/sabayon/entropy
+pkg = http://dl.sabayon.org/entropy
+pkg = http://bali.idrepo.or.id/sabayon/entropy
+pkg = http://ftp.sh.cvut.cz/MIRRORS/sabayon/entropy
+pkg = http://madura.idrepo.or.id/sabayon/entropy
+pkg = http://sumbawa.idrepo.or.id/sabayon/entropy
+pkg = http://www2.itti.ifce.edu.br/sabayon/entropy
+pkg = http://riksun.riken.go.jp/pub/pub/Linux/sabayon/entropy
+pkg = http://ftp.yz.yamagata-u.ac.jp/pub/linux/sabayonlinux/entropy
+pkg = ftp://ftp.klid.dk/sabayonlinux/entropy
+pkg = http://best.sabayon.org/entropy
+pkg = http://cross-lfs.sabayonlinux.org/entropy
+pkg = http://redir.sabayon.org/entropy
+pkg = http://ftp.fsn.hu/pub/linux/distributions/sabayon/entropy
+pkg = http://ftp.surfnet.nl/pub/os/Linux/distr/sabayonlinux/entropy
+pkg = http://ftp.cc.uoc.gr/mirrors/linux/SabayonLinux/entropy
+pkg = http://mirror.internode.on.net/pub/sabayon/entropy
+pkg = http://sabayon.c3sl.ufpr.br/entropy
+pkg = http://ftp.kddilabs.jp/Linux/packages/sabayonlinux/entropy
+pkg = http://mirror.yandex.ru/sabayon/entropy
+pkg = ftp://ftp.nluug.nl/pub/os/Linux/distr/sabayonlinux/entropy
+pkg = http://debian.mirror.dkm.cz/sabayon/entropy
+pkg = http://ftp.rnl.ist.utl.pt/pub/sabayon/entropy
+pkg = http://mirror.clarkson.edu/sabayon/entropy
+pkg = http://na.mirror.garr.it/mirrors/sabayonlinux/entropy
+pkg = http://pkg.sabayon.org
+' >> /etc/entropy/repositories.conf.d/entropy_sabayonlinux.org
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
@@ -12,7 +48,7 @@ pkg = https://repository.spike-pentesting.org
 #grub2-mkconfig -o /boot/grub/grub.cfg
 rsync -av -H -A -X --delete-during "rsync://rsync.at.gentoo.org/gentoo-portage/licenses/" "/usr/portage/licenses/"
 ls /usr/portage/licenses -1 | xargs -0 > /etc/entropy/packages/license.accept
-
+equo update --force
 
 
 ######END######
@@ -50,43 +86,6 @@ for moddir in $(find /lib/modules -maxdepth 1 -type d -empty); do
 done
 
 
-
-rm -rfv /etc/entropy/repositories.conf.d/entropy_sabayon-weekly
-
-echo '[sabayonlinux.org]
-desc = Sabayon Linux Official Repository
-repo = http://pkg.sabayon.org#bz2
-repo = http://pkg.repo.sabayon.org#bz2
-enabled = true
-pkg = http://mirror.umd.edu/sabayonlinux/entropy
-pkg = http://mirror.freelydifferent.com/sabayon/entropy
-pkg = http://dl.sabayon.org/entropy
-pkg = http://bali.idrepo.or.id/sabayon/entropy
-pkg = http://ftp.sh.cvut.cz/MIRRORS/sabayon/entropy
-pkg = http://madura.idrepo.or.id/sabayon/entropy
-pkg = http://sumbawa.idrepo.or.id/sabayon/entropy
-pkg = http://www2.itti.ifce.edu.br/sabayon/entropy
-pkg = http://riksun.riken.go.jp/pub/pub/Linux/sabayon/entropy
-pkg = http://ftp.yz.yamagata-u.ac.jp/pub/linux/sabayonlinux/entropy
-pkg = ftp://ftp.klid.dk/sabayonlinux/entropy
-pkg = http://best.sabayon.org/entropy
-pkg = http://cross-lfs.sabayonlinux.org/entropy
-pkg = http://redir.sabayon.org/entropy
-pkg = http://ftp.fsn.hu/pub/linux/distributions/sabayon/entropy
-pkg = http://ftp.surfnet.nl/pub/os/Linux/distr/sabayonlinux/entropy
-pkg = http://ftp.cc.uoc.gr/mirrors/linux/SabayonLinux/entropy
-pkg = http://mirror.internode.on.net/pub/sabayon/entropy
-pkg = http://sabayon.c3sl.ufpr.br/entropy
-pkg = http://ftp.kddilabs.jp/Linux/packages/sabayonlinux/entropy
-pkg = http://mirror.yandex.ru/sabayon/entropy
-pkg = ftp://ftp.nluug.nl/pub/os/Linux/distr/sabayonlinux/entropy
-pkg = http://debian.mirror.dkm.cz/sabayon/entropy
-pkg = http://ftp.rnl.ist.utl.pt/pub/sabayon/entropy
-pkg = http://mirror.clarkson.edu/sabayon/entropy
-pkg = http://na.mirror.garr.it/mirrors/sabayonlinux/entropy
-pkg = http://pkg.sabayon.org
-
-' >> /etc/entropy/repositories.conf.d/entropy_sabayonlinux.org
 
 
 ls -liah /etc/entropy/repositories.conf.d/
@@ -161,58 +160,53 @@ REPLACEMENT=">=sys-apps/openrc-0.9@sabayon-limbo
 >=app-misc/anaconda-runtime-1.1-r1@sabayonlinux.org
 >=app-misc/anaconda-runtime-1.1-r1@sabayon-limbo
 "
-
 safe_run equo update --force || exit 1
+
+
 # metasploit still targets ruby19
 
     masks=(=dev-ruby/actionpack-4.2.0@sabayonlinux.org
-=dev-ruby/activesupport-4.2.0@sabayonlinux.org
-=dev-ruby/rails-html-sanitizer-1.0.1@sabayonlinux.org
-=dev-ruby/rails-dom-testing-1.0.5@sabayonlinux.org
-=dev-ruby/activemodel-4.2.0@sabayonlinux.org
-=dev-ruby/activerecord-4.2.0@sabayonlinux.org
-=dev-ruby/rails-deprecated_sanitizer-1.0.3@sabayonlinux.org
+dev-ruby/builder@sabayonlinux.org
+dev-ruby/activesupport@sabayonlinux.org
+dev-ruby/rails-html-sanitizer@sabayonlinux.org
+dev-ruby/rails-dom-testing@sabayonlinux.org
+dev-ruby/activemodel@sabayonlinux.org
+dev-ruby/activerecord@sabayonlinux.org
+dev-ruby/rails-deprecated_sanitizer@sabayonlinux.org
 =net-misc/networkmanager-1.0.0@sabayonlinux.org
 =gnome-extra/nm-applet-1.0.0@sabayonlinux.org
 sys-boot/grub@sabayonlinux.org
 dev-ruby/rubygems@sabayonlinux.org
+dev-ruby/tilt@sabayonlinux.org
 dev-ruby/tzinfo@sabayonlinux.org
 dev-ruby/bundler@sabayonlinux.org
-dev-ruby/builder@sabayonlinux.org
-=dev-ruby/loofah-2.0.1@sabayonlinux.org
-=dev-ruby/arel-6.0.0@sabayonlinux.org
+dev-ruby/loofah@sabayonlinux.org
+dev-ruby/arel@sabayonlinux.org
 dev-ruby/mime-types@sabayonlinux.org
-=dev-ruby/actionview-4.2.0@sabayonlinux.org)
+dev-ruby/mime-types@sabayonlinux.org
+dev-ruby/actionview@sabayonlinux.org)
 
     for mask in "${masks[@]}"; do
         equo mask ${mask}
     done
 
-
-
-
-echo $REPLACEMENT >> /etc/entropy/packages/package.mask
-#echo $REPLACEMENT >> /etc/entropy/packages/package.mask.d/package.mask
-
-export ETP_NOINTERACTIVE=1
+export ETP_NONINTERACTIVE=1
 safe_run equo upgrade || exit 1
 equo upgrade --purge || exit 1
 
 
-equo install sys-boot/grub::spike
-
-
-
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
-#equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
-equo remove linux-sabayon --nodeps --configfiles
-equo remove --force-system sabayon-version --configfiles
+equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
 equo mask sabayon-version
+
+equo install sys-boot/grub::spike
+
 equo install  --multifetch 10 spike/spike::spike
 
 # ruby19 as default
 eselect ruby set ruby19
+
 equo query list installed -qv > /etc/sabayon-pkglist
 
 

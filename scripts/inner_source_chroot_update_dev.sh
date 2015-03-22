@@ -132,6 +132,7 @@ dev-ruby/rails-deprecated_sanitizer@sabayonlinux.org
 =gnome-extra/nm-applet-1.0.0@sabayonlinux.org
 sys-boot/grub@sabayonlinux.org
 dev-ruby/rubygems@sabayonlinux.org
+dev-ruby/tilt@sabayonlinux.org
 dev-ruby/tzinfo@sabayonlinux.org
 dev-ruby/bundler@sabayonlinux.org
 dev-ruby/loofah@sabayonlinux.org
@@ -144,13 +145,9 @@ dev-ruby/actionview@sabayonlinux.org)
         equo mask ${mask}
     done
 
-export ETP_NOINTERACTIVE=1
+export ETP_NONINTERACTIVE=1
 safe_run equo upgrade || exit 1
 equo upgrade --purge || exit 1
-
-
-equo install sys-boot/grub::spike
-
 
 
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
@@ -158,7 +155,7 @@ equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux s
 equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
 equo mask sabayon-version
 
-
+equo install sys-boot/grub::spike
 
 equo install  --multifetch 10 spike/spike::spike
 
