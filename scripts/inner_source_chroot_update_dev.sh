@@ -149,7 +149,7 @@ export ETP_NONINTERACTIVE=1
 safe_run equo upgrade || exit 1
 equo upgrade --purge || exit 1
 
-
+equo install x11-misc/lightdm
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
 equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
