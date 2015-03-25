@@ -251,5 +251,9 @@ equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux s
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 equo i spike-artwork-core
+wget http://repository.spike-pentesting.org/distfiles/anaconda-artwork.tar.gz -O /tmp/anaconda-artwork.tar.gz
+tar xvf /tmp/anaconda-artwork.tar.gz  -C /usr/share/anaconda/pixmaps/
+rm -rfv /tmp/anaconda-artwork.tar.gz
+
 
 equo query list installed -qv > /etc/sabayon-pkglist
