@@ -247,6 +247,9 @@ done
 RSYNC_URI="rsync://rsync.at.gentoo.org/gentoo-portage/profiles"
 PROFILES_DIR="/usr/portage/profiles"
 safe_run rsync -av -H -A -X --delete-during "${RSYNC_URI}/" "${PROFILES_DIR}/"
+equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
 
+sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
+equo i spike-artwork-core
 
 equo query list installed -qv > /etc/sabayon-pkglist
