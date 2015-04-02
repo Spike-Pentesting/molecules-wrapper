@@ -50,8 +50,9 @@ pkg = http://pkg.sabayon.org
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
-repo = https://repository.spike-pentesting.org#bz2
+repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
 enabled = true
+pkg = https://mirror.spike-pentesting.org/mirrors/spike
 pkg = https://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/spike
 
@@ -268,7 +269,6 @@ wget http://repository.spike-pentesting.org/distfiles/anaconda-artwork.tar.gz -O
 tar xvf /tmp/anaconda-artwork.tar.gz  -C /usr/share/anaconda/pixmaps/
 rm -rfv /tmp/anaconda-artwork.tar.gz
 # check if a kernel update is needed
-equo remove linux-sabayon
 
 available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
 echo
@@ -294,7 +294,6 @@ for slink in $(find /lib/modules/ -type l); do
 done
 
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
-equo remove linux-sabayon
 safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf

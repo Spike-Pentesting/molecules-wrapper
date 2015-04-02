@@ -40,8 +40,9 @@ pkg = http://pkg.sabayon.org
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
-repo = https://repository.spike-pentesting.org#bz2
+repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
 enabled = true
+pkg = https://mirror.spike-pentesting.org/mirrors/spike
 pkg = https://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/spike
 #sed -i 's:splash::g' /etc/default/sabayon-grub #plymouth fix
