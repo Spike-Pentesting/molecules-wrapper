@@ -214,14 +214,16 @@ equo install  --multifetch 10 spike/spike::spike
 # ruby19 as default
 eselect ruby set ruby19
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
-sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 equo i spike-artwork-core
+sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 
 wget http://repository.spike-pentesting.org/distfiles/anaconda-artwork.tar.gz -O /tmp/anaconda-artwork.tar.gz
 tar xvf /tmp/anaconda-artwork.tar.gz  -C /usr/share/anaconda/pixmaps/
 rm -rfv /tmp/anaconda-artwork.tar.gz
 
+
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
+equo remove linux-sabayon
 safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
 
 

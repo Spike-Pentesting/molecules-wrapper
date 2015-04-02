@@ -262,45 +262,41 @@ safe_run rsync -av -H -A -X --delete-during "${RSYNC_URI}/" "${PROFILES_DIR}/"
 equo install sys-boot/grub::spike
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
 
-sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 
 #Importing Anaconda artwork
 wget http://repository.spike-pentesting.org/distfiles/anaconda-artwork.tar.gz -O /tmp/anaconda-artwork.tar.gz
 tar xvf /tmp/anaconda-artwork.tar.gz  -C /usr/share/anaconda/pixmaps/
 rm -rfv /tmp/anaconda-artwork.tar.gz
 # check if a kernel update is needed
-kernel_target_pkg="sys-kernel/linux-spike"
-current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot)
-available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
-if [ "${current_kernel}" != "${available_kernel}" ] && \
-    [ -n "${available_kernel}" ] && [ -n "${current_kernel}" ]; then
-    echo
-    echo "@@ Upgrading kernel to ${available_kernel}"
-    echo
-    safe_run kernel-switcher switch "${available_kernel}" || exit 1
-    equo remove "${current_kernel}" || exit 1
-    # now delete stale files in /lib/modules
-    for slink in $(find /lib/modules/ -type l); do
-        if [ ! -e "${slink}" ]; then
-            echo "Removing broken symlink: ${slink}"
-            rm "${slink}" # ignore failure, best effort
-            # check if parent dir is empty, in case, remove
-            paren_slink=$(dirname "${slink}")
-            paren_children=$(find "${paren_slink}")
-            if [ -z "${paren_children}" ]; then
-                echo "${paren_slink} is empty, removing"
-                rmdir "${paren_slink}" # ignore failure, best effort
-            fi
-        fi
-    done
-else
-    echo "@@ Not upgrading kernels:"
-    echo "Current: ${current_kernel}"
-    echo "Avail:   ${available_kernel}"
-    echo
-fi
+equo remove linux-sabayon
 
+available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
+echo
+echo "@@ Upgrading kernel to ${available_kernel}"
+echo
+safe_run kernel-switcher switch "${available_kernel}" || exit 1
+equo remove "sys-kernel/linux-sabayon" || exit 1
+safe_run kernel-switcher switch "${available_kernel}" || exit 1
+
+# now delete stale files in /lib/modules
+for slink in $(find /lib/modules/ -type l); do
+    if [ ! -e "${slink}" ]; then
+        echo "Removing broken symlink: ${slink}"
+        rm "${slink}" # ignore failure, best effort
+        # check if parent dir is empty, in case, remove
+        paren_slink=$(dirname "${slink}")
+        paren_children=$(find "${paren_slink}")
+        if [ -z "${paren_children}" ]; then
+            echo "${paren_slink} is empty, removing"
+            rmdir "${paren_slink}" # ignore failure, best effort
+        fi
+    fi
+done
+
+#Overlayfs and squashfs errors for now, manually forcing 3.18.10
+equo remove linux-sabayon
 safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
 
+sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 
 equo query list installed -qv > /etc/sabayon-pkglist
