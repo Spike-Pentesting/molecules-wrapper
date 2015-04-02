@@ -11,6 +11,9 @@ release_file: /etc/sabayon-edition
 # ISO Image title
 iso_title: Spike MATE
 
+# Enable XZ compression in mksquashfs
+extra_mksquashfs_parameters: -comp xz -Xbcj x86
+
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and before inner_chroot_script)
 %env outer_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_pre.sh
@@ -22,7 +25,7 @@ iso_title: Spike MATE
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
-%env inner_chroot_script_after: /tmp/remaster_generic_inner_chroot_script_after_wrap.sh mate
+%env inner_chroot_script_after: /tmp/remaster_generic_inner_chroot_script_after_wrap.sh gnome
 
 # Outer chroot script command, to be executed outside destination chroot before
 # before entering it (and AFTER inner_chroot_script)
@@ -32,8 +35,9 @@ iso_title: Spike MATE
 %env error_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/remaster_error_script.sh
 
 # Pre-ISO building script. Hook to be able to copy kernel images in place, for example
-%env pre_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_pre_iso_script.sh "MATE"
+%env pre_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_pre_iso_script.sh "Cinnamon"
 
+%env post_iso_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/generic_post_iso_script.sh amd64
 
 # Destination directory for the ISO image path (MANDATORY)
 %env destination_iso_directory: ${SABAYON_MOLECULE_HOME:-/sabayon}/../molecules_isos
@@ -59,7 +63,6 @@ packages_to_add:
 	app-office/abiword,
 	app-office/gnumeric,
 	gnome-extra/nm-applet-gtk2,
-	mate-base/mate,
 	media-plugins/alsa-plugins,
 	media-sound/audacious,
 	net-dialup/rp-pppoe,
@@ -77,7 +80,8 @@ packages_to_add:
 	x11-misc/lightdm-base,
 	x11-misc/lightdm-gtk-greeter,
 	x11-terms/guake,
-	x11-themes/gnome-themes-standard
+	x11-themes/gnome-themes-standard,
+	gnome-extra/cinnamon
 
 # Determine whether repositories update should be run (if packages_to_add is set)
 # (default is: no), values are: yes, no.
