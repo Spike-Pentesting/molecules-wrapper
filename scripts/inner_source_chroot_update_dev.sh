@@ -121,9 +121,8 @@ safe_run equo update --force || exit 1
 
 # metasploit still targets ruby19
 
-   masks=(=dev-ruby/actionpack-4.2.0@sabayonlinux.org
+   masks=(=dev-ruby/actionpack@sabayonlinux.org
 dev-ruby/builder@sabayonlinux.org
-dev-ruby/activesupport@sabayonlinux.org
 dev-ruby/rails-html-sanitizer@sabayonlinux.org
 dev-ruby/rails-dom-testing@sabayonlinux.org
 dev-ruby/activemodel@sabayonlinux.org
@@ -139,8 +138,17 @@ dev-ruby/bundler@sabayonlinux.org
 dev-ruby/loofah@sabayonlinux.org
 dev-ruby/arel@sabayonlinux.org
 dev-ruby/mime-types@sabayonlinux.org
-dev-ruby/mime-types@sabayonlinux.org
-dev-ruby/actionview@sabayonlinux.org)
+dev-ruby/actionpack@sabayonlinux.org
+dev-ruby/activesupport@sabayonlinux.org
+dev-ruby/ffi@sabayonlinux.org
+www-servers/thin@sabayonlinux.org
+dev-ruby/daemons@sabayonlinux.org
+dev-ruby/ruby_parser@sabayonlinux.org
+dev-ruby/actionview@sabayonlinux.org
+dev-ruby/execjs@sabayonlinux.org
+dev-ruby/actionpack@spike-limbo
+dev-ruby/sinatra@spike
+dev-ruby/mime-types@sabayonlinux.org)
 
     for mask in "${masks[@]}"; do
         equo mask ${mask}
@@ -150,10 +158,13 @@ export ETP_NONINTERACTIVE=1
 safe_run equo upgrade || exit 1
 equo upgrade --purge || exit 1
 
+
+equo i spike-artwork-core
 equo install x11-misc/lightdm
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
+
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
-#equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
+equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
 equo mask sabayon-version
 
 equo install sys-boot/grub::spike
@@ -162,8 +173,6 @@ equo install  --multifetch 10 spike/spike::spike
 
 # ruby19 as default
 eselect ruby set ruby19
-
-
 
 safe_run equo upgrade --fetch || exit 1
 equo upgrade --purge || exit 1
@@ -248,12 +257,50 @@ done
 RSYNC_URI="rsync://rsync.at.gentoo.org/gentoo-portage/profiles"
 PROFILES_DIR="/usr/portage/profiles"
 safe_run rsync -av -H -A -X --delete-during "${RSYNC_URI}/" "${PROFILES_DIR}/"
+
+
+equo install sys-boot/grub::spike
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
-equo i spike-artwork-core
+
+#Importing Anaconda artwork
 wget http://repository.spike-pentesting.org/distfiles/anaconda-artwork.tar.gz -O /tmp/anaconda-artwork.tar.gz
 tar xvf /tmp/anaconda-artwork.tar.gz  -C /usr/share/anaconda/pixmaps/
 rm -rfv /tmp/anaconda-artwork.tar.gz
+# check if a kernel update is needed
+kernel_target_pkg="sys-kernel/linux-spike"
+current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot)
+available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
+if [ "${current_kernel}" != "${available_kernel}" ] && \
+    [ -n "${available_kernel}" ] && [ -n "${current_kernel}" ]; then
+    echo
+    echo "@@ Upgrading kernel to ${available_kernel}"
+    echo
+    safe_run kernel-switcher switch "${available_kernel}" || exit 1
+    equo remove "${current_kernel}" || exit 1
+    # now delete stale files in /lib/modules
+    for slink in $(find /lib/modules/ -type l); do
+        if [ ! -e "${slink}" ]; then
+            echo "Removing broken symlink: ${slink}"
+            rm "${slink}" # ignore failure, best effort
+            # check if parent dir is empty, in case, remove
+            paren_slink=$(dirname "${slink}")
+            paren_children=$(find "${paren_slink}")
+            if [ -z "${paren_children}" ]; then
+                echo "${paren_slink} is empty, removing"
+                rmdir "${paren_slink}" # ignore failure, best effort
+            fi
+        fi
+    done
+else
+    echo "@@ Not upgrading kernels:"
+    echo "Current: ${current_kernel}"
+    echo "Avail:   ${available_kernel}"
+    echo
+fi
+
+safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
+
 
 equo query list installed -qv > /etc/sabayon-pkglist
