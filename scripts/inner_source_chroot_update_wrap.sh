@@ -225,7 +225,15 @@ rm -rfv /tmp/anaconda-artwork.tar.gz
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
 equo remove linux-sabayon
 safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
-
+echo '
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/zsh
+SKEL=/etc/skel
+' > /etc/default/useradd
 
 equo query list installed -qv > /etc/sabayon-pkglist
 

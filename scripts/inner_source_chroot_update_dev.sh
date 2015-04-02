@@ -298,5 +298,14 @@ equo remove linux-sabayon
 safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
+echo '
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/zsh
+SKEL=/etc/skel
+' > /etc/default/useradd
 
 equo query list installed -qv > /etc/sabayon-pkglist
