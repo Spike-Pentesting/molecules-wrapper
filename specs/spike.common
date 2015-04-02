@@ -16,10 +16,6 @@ packages_to_add:
         dev-libs/fribidi,
         games-misc/cowsay,
         sys-fs/ntfs3g,
-        x11-misc/lightdm,
-        # lxdm seems to not automatically boot e17: lxde-base/lxdm removed, swapped with lightdm
-        x11-misc/lightdm-base,
-        x11-misc/lightdm-gtk-greeter,
         lxde-base/lxpolkit,
         media-fonts/corefonts,
         media-fonts/dejavu,

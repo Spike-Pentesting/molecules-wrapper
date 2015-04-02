@@ -77,7 +77,11 @@ packages_to_add:
 	x11-misc/lightdm-base,
 	x11-misc/lightdm-gtk-greeter,
 	x11-terms/guake,
-	x11-themes/gnome-themes-standard
+	x11-themes/gnome-themes-standard,
+	x11-misc/lightdm,
+        	# lxdm seems to not automatically boot e17: lxde-base/lxdm removed, swapped with lightdm
+        	x11-misc/lightdm-base,
+        	x11-misc/lightdm-gtk-greeter
 
 # Determine whether repositories update should be run (if packages_to_add is set)
 # (default is: no), values are: yes, no.
