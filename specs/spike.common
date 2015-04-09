@@ -48,6 +48,7 @@ packages_to_add:
         x11-themes/gtk-engines:2,
         spike/spike-artwork-core,
         spike/spike-artwork-grub,
+	spike/spike-artwork-gnome,
         spike/spike-artwork-isolinux,
         spike/spike-live,
         spike/spike,
