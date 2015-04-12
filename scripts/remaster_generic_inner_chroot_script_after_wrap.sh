@@ -29,7 +29,7 @@ fi
 rm -rfv /etc/entropy/packages/license.accept
 #chsh -s /bin/zsh sabayonuser
 # genkernel --plymouth-theme=spike  --luks initramfs
-
+#equo rm spike-artwork-core --nodeps
 echo '
 # useradd defaults file
 GROUP=100
@@ -41,3 +41,5 @@ SKEL=/etc/skel
 ' > /etc/default/useradd
 #set default plymouth theme
 #plymouth-set-default-theme spike
+
+equo rm --nodeps sabayon-artwork-core

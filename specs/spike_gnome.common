@@ -82,6 +82,7 @@ packages_to_add:
 	games-misc/cowsay,
 	games-util/steam-meta,
 	gnome-base/gnome-shell,
+	gnome-base/gdm,
 	gnome-extra/gnome-calculator,
 	gnome-extra/gconf-editor,
 	gnome-extra/gnome-games,

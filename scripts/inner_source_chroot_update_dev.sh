@@ -294,7 +294,7 @@ for slink in $(find /lib/modules/ -type l); do
 done
 
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
-safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
+safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.11'|| exit 1
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
 echo '

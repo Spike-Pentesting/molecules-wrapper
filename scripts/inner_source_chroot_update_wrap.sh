@@ -1,5 +1,6 @@
 #echo '192.99.32.76 repository.spike-pentesting.org' >>/etc/hosts
-
+#equo up
+#equo mask dev-ruby/packetfu@sabayonlinux.org
 
 rm -rfv /etc/entropy/repositories.conf.d/*
 #rm -rfv /etc/entropy/repositories.conf.d/entropy_sabayon-weekly
@@ -40,11 +41,12 @@ pkg = http://pkg.sabayon.org
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
-repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
+repo = https://repository.spike-pentesting.org#bz2
+#repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
 enabled = true
-pkg = https://mirror.spike-pentesting.org/mirrors/spike
+#pkg = https://mirror.spike-pentesting.org/mirrors/spike
 pkg = https://repository.spike-pentesting.org
-' >> /etc/entropy/repositories.conf.d/spike
+' >> /etc/entropy/repositories.conf.d/entropy_spike
 #sed -i 's:splash::g' /etc/default/sabayon-grub #plymouth fix
 #grub2-mkconfig -o /boot/grub/grub.cfg
 rsync -av -H -A -X --delete-during "rsync://rsync.at.gentoo.org/gentoo-portage/licenses/" "/usr/portage/licenses/"
@@ -60,9 +62,9 @@ available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
 echo
 echo "@@ Upgrading kernel to ${available_kernel}"
 echo
-safe_run kernel-switcher switch "${available_kernel}" || exit 1
+#safe_run kernel-switcher switch "${available_kernel}" || exit 1
 equo remove "sys-kernel/linux-sabayon" || exit 1
-safe_run kernel-switcher switch "${available_kernel}" || exit 1
+#safe_run kernel-switcher switch "${available_kernel}" || exit 1
 
 # now delete stale files in /lib/modules
 for slink in $(find /lib/modules/ -type l); do
@@ -139,7 +141,7 @@ REPLACEMENT=">=sys-apps/openrc-0.9@sabayon-limbo
 >=x11-themes/sabayon-artwork-extra-1@sabayon-weekly
 >=x11-themes/sabayon-artwork-extra-1@sabayonlinux.org
 >=x11-themes/sabayon-artwork-extra-1@sabayon-limbo
->=x11-themes/sabayon-artwor-gnome-1@sabayon-weekly
+>=x11-themes/sabayon-artwork-gnome-1@sabayon-weekly
 >=x11-themes/sabayon-artwork-gnome-1@sabayonlinux.org
 >=x11-themes/sabayon-artwork-gnome-1@sabayon-limbo
 >=x11-themes/sabayon-artwork-grub-1@sabayon-weekly
@@ -166,7 +168,8 @@ safe_run equo update --force || exit 1
 
 # metasploit still targets ruby19
 
- masks=(=dev-ruby/actionpack@sabayonlinux.org
+ masks=(
+=dev-ruby/actionpack@sabayonlinux.org
 dev-ruby/builder@sabayonlinux.org
 dev-ruby/rails-html-sanitizer@sabayonlinux.org
 dev-ruby/rails-dom-testing@sabayonlinux.org
@@ -175,6 +178,12 @@ dev-ruby/activerecord@sabayonlinux.org
 dev-ruby/rails-deprecated_sanitizer@sabayonlinux.org
 =net-misc/networkmanager-1.0.0@sabayonlinux.org
 =gnome-extra/nm-applet-1.0.0@sabayonlinux.org
+#x11-themes/sabayon-artwork-core
+#x11-themes/sabayon-artwork-grub
+#x11-themes/sabayon-artwork-isolinux
+#x11-themes/sabayon-artwork-extra
+#x11-themes/sabayon-artwork-kde
+#x11-themes/sabayon-artwork-lxde
 sys-boot/grub@sabayonlinux.org
 dev-ruby/rubygems@sabayonlinux.org
 dev-ruby/tilt@sabayonlinux.org
@@ -191,8 +200,9 @@ dev-ruby/daemons@sabayonlinux.org
 dev-ruby/ruby_parser@sabayonlinux.org
 dev-ruby/actionview@sabayonlinux.org
 dev-ruby/execjs@sabayonlinux.org
-dev-ruby/sinatra@spike
-dev-ruby/mime-types@sabayonlinux.org)
+dev-ruby/mime-types@sabayonlinux.org
+dev-ruby/packetfu@sabayonlinux.org
+)
 
     for mask in "${masks[@]}"; do
         equo mask ${mask}
@@ -225,7 +235,35 @@ rm -rfv /tmp/anaconda-artwork.tar.gz
 
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
 equo remove linux-sabayon
-safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
+#safe_run kernel-switcher switch 'sys-kernel/linux-spike:3.18'|| exit 1
+safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18-10'|| exit 1
+# now delete stale files in /lib/modules
+for slink in $(find /lib/modules/ -type l); do
+    if [ ! -e "${slink}" ]; then
+        echo "Removing broken symlink: ${slink}"
+        rm "${slink}" # ignore failure, best effort
+        # check if parent dir is empty, in case, remove
+        paren_slink=$(dirname "${slink}")
+        paren_children=$(find "${paren_slink}")
+        if [ -z "${paren_children}" ]; then
+            echo "${paren_slink} is empty, removing"
+            rmdir "${paren_slink}" # ignore failure, best effort
+        fi
+    fi
+done
+
+
+# keep /lib/modules clean at all times
+for moddir in $(find /lib/modules -maxdepth 1 -type d -empty); do
+    echo "Cleaning ${moddir} because it's empty"  
+    rmdir "${moddir}"
+done
+
+
+
+
+
+
 echo '
 # useradd defaults file
 GROUP=100
@@ -237,6 +275,7 @@ SKEL=/etc/skel
 ' > /etc/default/useradd
 
 equo query list installed -qv > /etc/sabayon-pkglist
+
 
 
 
