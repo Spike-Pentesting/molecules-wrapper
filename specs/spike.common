@@ -46,13 +46,7 @@ packages_to_add:
         x11-themes/gnome-themes-standard,
         x11-themes/gnome-icon-theme,
         x11-themes/gtk-engines:2,
-        spike/spike-artwork-core,
-        spike/spike-artwork-grub,
-	spike/spike-artwork-gnome,
-        spike/spike-artwork-isolinux,
         spike/spike-live,
         spike/spike,
-        spike/spike-menu,
-        spike/spike-skel,
         sys-devel/gcc,
         x11-terms/terminator

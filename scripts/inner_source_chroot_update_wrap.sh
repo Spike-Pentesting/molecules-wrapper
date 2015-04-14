@@ -56,15 +56,16 @@ equo update --force
 
 ######END######
 # check if a kernel update is needed
-kernel_target_pkg="sys-kernel/linux-spike"
+#kernel_target_pkg="sys-kernel/linux-spike"
 
-available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
-echo
-echo "@@ Upgrading kernel to ${available_kernel}"
-echo
+#available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
+#echo
+#echo "@@ Upgrading kernel to ${available_kernel}"
+#echo
 #safe_run kernel-switcher switch "${available_kernel}" || exit 1
-equo remove "sys-kernel/linux-sabayon" || exit 1
+equo remove "sys-kernel/linux-sabayon"
 #safe_run kernel-switcher switch "${available_kernel}" || exit 1
+safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
 
 # now delete stale files in /lib/modules
 for slink in $(find /lib/modules/ -type l); do
@@ -222,8 +223,8 @@ equo install sys-boot/grub::spike
 
 equo install  --multifetch 10 spike/spike::spike
 
-# ruby19 as default
-eselect ruby set ruby19
+# ruby20 as default
+eselect ruby set ruby20
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
 equo i spike-artwork-core
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
@@ -235,8 +236,11 @@ rm -rfv /tmp/anaconda-artwork.tar.gz
 
 #Overlayfs and squashfs errors for now, manually forcing 3.18.10
 equo remove linux-sabayon
+equo i spike/spike
 #safe_run kernel-switcher switch 'sys-kernel/linux-spike:3.18'|| exit 1
-safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18-10'|| exit 1
+safe_run kernel-switcher switch 'sys-kernel/linux-spike-3.18.10'|| exit 1
+safe_run equo i x11-drivers/xf86-video-virtualbox-4.3.26#3.18.0-spike  app-emulation/virtualbox-guest-additions-4.3.26#3.18.0-spike  app-emulation/virtualbox-modules-4.3.26#3.18.0-spike 
+safe_run equo i  app-laptop/nvidiabl-0.72#3.18.0-spike x11-drivers/nvidia-drivers-346.35#3.18.0-spike x11-drivers/nvidia-userspace-346.35::spike
 # now delete stale files in /lib/modules
 for slink in $(find /lib/modules/ -type l); do
     if [ ! -e "${slink}" ]; then

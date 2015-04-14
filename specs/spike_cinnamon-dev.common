@@ -9,7 +9,7 @@ release_string: Spike Linux
 release_file: /etc/sabayon-edition
 
 # ISO Image title
-iso_title: Spike MATE
+iso_title: Spike Cinnamon
 
 # Enable XZ compression in mksquashfs
 extra_mksquashfs_parameters: -comp xz -Xbcj x86
@@ -21,7 +21,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # Execute repositories update here, in a more fault-tolerant flavor
 #%env inner_chroot_script: /tmp/remaster_generic_inner_chroot_script_wrap.sh
 
-%env inner_chroot_script: /tmp/inner_source_chroot_update_wrap.sh
+%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/inner_source_chroot_update_dev.sh
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
@@ -77,11 +77,12 @@ packages_to_add:
 	www-client/google-chrome,
 	www-plugins/chrome-binary-plugins,
 	x11-misc/magneto-gtk,
-	x11-misc/lightdm-base,
-	x11-misc/lightdm-gtk-greeter,
+	gnome-base/gdm,
 	x11-terms/guake,
 	x11-themes/gnome-themes-standard,
-	gnome-extra/cinnamon
+	gnome-extra/cinnamon,
+	spike/spike,
+	spike/spike-artwork-gnome
 
 # Determine whether repositories update should be run (if packages_to_add is set)
 # (default is: no), values are: yes, no.
