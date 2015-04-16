@@ -50,9 +50,10 @@ pkg = http://pkg.sabayon.org
 
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
-repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
+repo = https://repository.spike-pentesting.org#bz2
+#repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
 enabled = true
-pkg = https://mirror.spike-pentesting.org/mirrors/spike
+#pkg = https://mirror.spike-pentesting.org/mirrors/spike
 pkg = https://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/spike
 
@@ -180,7 +181,7 @@ safe_run equo upgrade --fetch || exit 1
 equo upgrade --purge || exit 1
 equo remove "${PACKAGES_TO_REMOVE[@]}" # ignore
 echo "-5" | equo conf update
-available_kernel='sys-kernel/linux-spike-3.18.10'
+available_kernel='sys-kernel/linux-spike-3.19.4'
 current_kernel=$(equo match --installed "sys-kernel/linux-sabayon" -q --showslot)
 # check if a kernel update is needed
 
@@ -288,7 +289,7 @@ for slink in $(find /lib/modules/ -type l); do
 done
 
 sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
-equo mask sabayon-artwork-core
+#equo mask sabayon-artwork-core
 equo rm sabayon-artwork-core
 equo i spike-artwork-core
 echo '
@@ -300,5 +301,7 @@ EXPIRE=
 SHELL=/bin/zsh
 SKEL=/etc/skel
 ' > /etc/default/useradd
+equo remove sabayon-artwork-isolinux
+equo i spike-artwork-isolinux 
 
 equo query list installed -qv > /etc/sabayon-pkglist

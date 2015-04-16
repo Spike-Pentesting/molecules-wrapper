@@ -148,7 +148,6 @@ dev-ruby/ruby_parser@sabayonlinux.org
 dev-ruby/actionview@sabayonlinux.org
 dev-ruby/execjs@sabayonlinux.org
 dev-ruby/actionpack@spike-limbo
-dev-ruby/sinatra@spike
 dev-ruby/mime-types@sabayonlinux.org)
 
     for mask in "${masks[@]}"; do
@@ -163,8 +162,6 @@ equo i sys-boot/plymouth
 
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
 equo remove sabayon-artwork-grub sabayon-artwork-core sabayon-artwork-isolinux sabayon-version sabayon-skel sabayon-live sabayonlive-tools sabayon-live  sabayon-artwork-gnome --nodeps --force-system
-#equo remove linux-sabayon:$(eselect kernel list | grep "*" | awk '{print $2}' | cut -d'-' -f2) --nodeps --configfiles
-#equo remove linux-sabayon
 equo mask sabayon-version
 
 equo install sys-boot/grub::spike
@@ -178,9 +175,9 @@ echo "-5" | equo conf update
 
 # check if a kernel update is needed
 kernel_target_pkg="sys-kernel/linux-spike"
-#current_kernel=$(equo match --installed "${kernel_target_pkg}" -q --showslot)
-#available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
-available_kernel="sys-kernel/linux-spike-3.18.10"
+current_kernel=$(equo match --installed "sys-kernel/linux-sabayon" -q --showslot)
+available_kernel=$(equo match "${kernel_target_pkg}" -q --showslot)
+
 #if [ "${current_kernel}" != "${available_kernel}" ] && \
 #    [ -n "${available_kernel}" ] && [ -n "${current_kernel}" ]; then
     echo
@@ -281,5 +278,6 @@ EXPIRE=
 SHELL=/bin/zsh
 SKEL=/etc/skel
 ' > /etc/default/useradd
-
+equo remove sabayon-artwork-isolinux
+equo i spike-artwork-isolinux 
 equo query list installed -qv > /etc/sabayon-pkglist

@@ -23,7 +23,7 @@ elif [ "${1}" = "awesome" ]; then
 	echo "AWESOME build!"
 fi
 
-
+sd_disable cdeject # temporary fix to get 3.19 + overlayfs working
 ######END######
 
 rm -rfv /etc/entropy/packages/license.accept
