@@ -1,5 +1,5 @@
 export SABAYON_MOLECULE_HOME=$(pwd)"/molecules"
-export SABAYON_RELEASE="1.0.2"
+export SABAYON_RELEASE="1.0.2b"
 
 
 if [ -d "${SABAYON_MOLECULE_HOME}" ]; then
@@ -25,8 +25,8 @@ chmod +x "$(pwd)"/molecules/scripts/make_grub_efi.sh
 cp -rfv "$(pwd)"/scripts/inner_source_chroot_update_dev.sh "$(pwd)"/molecules/scripts/inner_source_chroot_update_dev.sh
 chmod +x "$(pwd)"/molecules/scripts/inner_source_chroot_update_dev.sh
 
-cp -rfv "$(pwd)"/scripts/inner_source_chroot_update_stable.sh "$(pwd)"/molecules/scripts/inner_source_chroot_update_stable.sh
-chmod +x "$(pwd)"/molecules/scripts/inner_source_chroot_update_stable.sh
+cp -rfv "$(pwd)"/scripts/inner_source_chroot_update_base.sh "$(pwd)"/molecules/scripts/inner_source_chroot_update_base.sh
+chmod +x "$(pwd)"/molecules/scripts/inner_source_chroot_update_base.sh
 
 
 cp -rfv "$(pwd)"/scripts/generic_pre_iso_script.sh "$(pwd)"/molecules/scripts/generic_pre_iso_script.sh

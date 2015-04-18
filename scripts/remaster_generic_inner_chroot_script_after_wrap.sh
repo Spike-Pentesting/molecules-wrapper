@@ -15,6 +15,8 @@ elif [ "${1}" = "fluxbox" ]; then
 	echo "FLUXBOX build!"
 elif [ "${1}" = "gnome" ]; then
 	echo "GNOME build!"
+equo rm --nodeps sabayon-artwork-gnome --force-system
+equo i spike-artwork-gnome
 elif [ "${1}" = "xfceforensic" ]; then
 	echo "xfceforensic build!"
 elif [ "${1}" = "kde" ]; then

@@ -51,9 +51,8 @@ pkg = http://pkg.sabayon.org
 echo '[spike]
 desc = Spike Pentesting Sabayon Repository
 repo = https://repository.spike-pentesting.org#bz2
-#repo = https://mirror.spike-pentesting.org/mirrors/spike#bz2
 enabled = true
-#pkg = https://mirror.spike-pentesting.org/mirrors/spike
+pkg = https://mirror.spike-pentesting.org/mirrors/spike
 pkg = https://repository.spike-pentesting.org
 ' >> /etc/entropy/repositories.conf.d/spike
 
@@ -114,7 +113,8 @@ ls -liah /etc/entropy/repositories.conf.d/
 safe_run equo update --force || exit 1
 
 
-# metasploit still targets ruby19
+equo i sys-boot/plymouth
+
 
    masks=(
 =dev-ruby/actionpack@sabayonlinux.org
@@ -132,6 +132,7 @@ dev-ruby/rails-deprecated_sanitizer@sabayonlinux.org
 #x11-themes/sabayon-artwork-extra
 #x11-themes/sabayon-artwork-kde
 #x11-themes/sabayon-artwork-lxde
+sys-boot/plymouth@sabayonlinux.org
 sys-boot/grub@sabayonlinux.org
 dev-ruby/rubygems@sabayonlinux.org
 dev-ruby/tilt@sabayonlinux.org
@@ -160,7 +161,7 @@ export ETP_NONINTERACTIVE=1
 safe_run equo upgrade || exit 1
 equo upgrade --purge || exit 1
 
-equo i sys-boot/plymouth
+#equo i sys-boot/plymouth
 equo i spike-artwork-core
 
 equo mask sabayon-skel sabayon-version sabayon-artwork-grub sabayon-live
@@ -288,10 +289,22 @@ for slink in $(find /lib/modules/ -type l); do
     fi
 done
 
-sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
+#
+#sed -i 's:sabayon:spike:g' /etc/plymouth/plymouthd.conf
+
+echo '
+[Daemon]
+Theme=spike
+' > /etc/plymouth/plymouthd.conf
+
+
+
 #equo mask sabayon-artwork-core
 equo rm sabayon-artwork-core
 equo i spike-artwork-core
+
+
+
 echo '
 # useradd defaults file
 GROUP=100

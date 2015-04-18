@@ -21,7 +21,7 @@ extra_mksquashfs_parameters: -comp xz -Xbcj x86
 # Execute repositories update here, in a more fault-tolerant flavor
 #%env inner_chroot_script: /tmp/remaster_generic_inner_chroot_script_wrap.sh
 
-%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/inner_source_chroot_update_stable.sh
+%env inner_chroot_script: ${SABAYON_MOLECULE_HOME:-/sabayon}/scripts/inner_source_chroot_update_base.sh
 
 # Inner chroot script command, to be executed inside destination chroot after
 # packages installation and removal
